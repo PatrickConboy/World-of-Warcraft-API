@@ -46,7 +46,7 @@ page = 'search/tweets.json'
 
 # Depending on the query we are interested in, we append the necessary string
 # As you read through the twitter API, you'll find more possibilities
-req_url = base_url + page + '?q=Hanover+College&tweet_mode=extended&count=100'
+req_url = base_url + page + '?q=Overwatch+Roadhog&tweet_mode=extended&count=100'
 
 # We perform a request. Contains standard HTTP information
 response = oauth.get(req_url)
@@ -64,7 +64,15 @@ while True:
    if len(tweets) > 10000:
       break
    next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
-   print(results['search_metadata']['next_results'])
+#    print(results['search_metadata']['next_results'])
    response = oauth.get(next_search)
    results = json.loads(response.content.decode('utf-8'))
    tweets.extend(results['statuses'])
+
+# These 4 lines just put all the 'full_text' fields from our list of tweets
+# into a list and prints them with a line break after each tweet for readability.
+# Just testing stuff. Will delete later :D
+texts = [tweet['full_text'] for tweet in tweets]
+for tweet in texts:
+    print(tweet)
+    print("    ")
