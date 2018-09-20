@@ -44,9 +44,15 @@ base_url = 'https://api.twitter.com/1.1/'
 # appended to that.
 page = 'search/tweets.json'
 
+                # END OF AUTHENTICATION AND OAUTH STUFF #
+
+
+             # BEGINNING OF INDIVIDUAL QUERIES FOR EACH HERO #
+
+#################### QUERY FOR D.VA TWEETS ##############################
 # Depending on the query we are interested in, we append the necessary string
 # As you read through the twitter API, you'll find more possibilities
-req_url = base_url + page + '?q=Overwatch+Roadhog&tweet_mode=extended&count=100'
+req_url = base_url + page + '?q=Overwatch+DVA&tweet_mode=extended&count=100'
 
 # We perform a request. Contains standard HTTP information
 response = oauth.get(req_url)
@@ -69,10 +75,15 @@ while True:
    results = json.loads(response.content.decode('utf-8'))
    tweets.extend(results['statuses'])
 
+                # END OF QUERIES FOR EACH HERO #
+
+
+            # BEGINNING OF AGGREGATING COLLECTED DATA #
+
 # These 4 lines just put all the 'full_text' fields from our list of tweets
 # into a list and prints them with a line break after each tweet for readability.
 # Just testing stuff. Will delete later :D
 texts = [tweet['full_text'] for tweet in tweets]
 for tweet in texts:
-    print(tweet)
+    print(tweet.encode("utf-8"))
     print("    ")
