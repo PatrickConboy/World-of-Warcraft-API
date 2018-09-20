@@ -209,17 +209,44 @@ while True:
    results = json.loads(response.content.decode('utf-8'))
    hammond_tweets.extend(results['statuses'])
 
+
+
+#################### QUERY FOR ZARYA TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+Zarya&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention Zarya 
+zarya_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break 
+   if len(zarya_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   zarya_tweets.extend(results['statuses'])
+
                 # END OF QUERIES FOR EACH HERO #
 
 
-            # BEGINNING OF AGGREGATING COLLECTED DATA #
+            # BEGINNING OF ORGANIZING QUERIES INTO DATA STRUCTURES #
 
 # These 4 lines just put all the 'full_text' fields from our list of tweets
 # into a list and prints them with a line break after each tweet for readability.
 # Just testing stuff. Will delete later :D
-tweet_text = [tweet['full_text'] for tweet in dva2_tweets]
-# for tweet in tweet_text:
-#     print(tweet)
-# print(len(tweet_text))
+tweet_text = [tweet['full_text'] for tweet in hammond_tweets]
+for tweet in tweet_text:
+    print(tweet)
+print(len(tweet_text))
 
 
