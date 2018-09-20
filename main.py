@@ -12,9 +12,9 @@
 
 # Loading libraries needed for authentication and requests
 import operator
+import json
 from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import BackendApplicationClient
-import json
 
 # In order to use this script, you must:
 # - Have a Twitter account and create an app
@@ -50,8 +50,7 @@ page = 'search/tweets.json'
              # BEGINNING OF INDIVIDUAL QUERIES FOR EACH HERO #
 
 #################### QUERY FOR D.VA TWEETS ##############################
-# Depending on the query we are interested in, we append the necessary string
-# As you read through the twitter API, you'll find more possibilities
+# This is where we define what type of tweets we want, via the string below
 req_url = base_url + page + '?q=Overwatch+DVA&tweet_mode=extended&count=100'
 
 # We perform a request. Contains standard HTTP information
@@ -61,19 +60,48 @@ response = oauth.get(req_url)
 results = json.loads(response.content.decode('utf-8'))
 
 ## Process the results
-## CAUTION: The following code will attempt to read up to 10000 tweets that
-## Mention Hanover College. You should NOT change this code.
-tweets = results['statuses']
+## The following code will attempt to read up to 10000 tweets that
+## mention DVA 
+dva_tweets = results['statuses']
 while True:
    if not ('next_results' in results['search_metadata']):
       break
-   if len(tweets) > 10000:
+   if len(dva_tweets) > 10000:
       break
    next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
 #    print(results['search_metadata']['next_results'])
    response = oauth.get(next_search)
    results = json.loads(response.content.decode('utf-8'))
-   tweets.extend(results['statuses'])
+   dva_tweets.extend(results['statuses'])
+
+
+######### Adding seperate DVA query for different spelling of hero name ##############
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=ow+dva&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention DVA 
+dva2_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break
+   if len(dva2_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   dva2_tweets.extend(results['statuses'])
+
+# This line combines all of our different dva queries into one list of tweets
+dva2_tweets = dva2_tweets + dva_tweets
 
                 # END OF QUERIES FOR EACH HERO #
 
@@ -83,7 +111,5 @@ while True:
 # These 4 lines just put all the 'full_text' fields from our list of tweets
 # into a list and prints them with a line break after each tweet for readability.
 # Just testing stuff. Will delete later :D
-texts = [tweet['full_text'] for tweet in tweets]
-for tweet in texts:
-    print(tweet.encode("utf-8"))
-    print("    ")
+texts = [tweet['full_text'] for tweet in dva_tweets]
+
