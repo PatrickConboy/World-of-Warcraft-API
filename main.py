@@ -75,9 +75,10 @@ while True:
    dva_tweets.extend(results['statuses'])
 
 
-######### Adding seperate DVA query for different spelling of hero name ##############
+
+#################### QUERY FOR ORISA TWEETS ##############################
 # This is where we define what type of tweets we want, via the string below
-req_url = base_url + page + '?q=ow+dva&tweet_mode=extended&count=100'
+req_url = base_url + page + '?q=Overwatch+Orisa&tweet_mode=extended&count=100'
 
 # We perform a request. Contains standard HTTP information
 response = oauth.get(req_url)
@@ -87,21 +88,99 @@ results = json.loads(response.content.decode('utf-8'))
 
 ## Process the results
 ## The following code will attempt to read up to 10000 tweets that
-## mention DVA 
-dva2_tweets = results['statuses']
+## mention Orisa 
+orisa_tweets = results['statuses']
 while True:
    if not ('next_results' in results['search_metadata']):
       break
-   if len(dva2_tweets) > 10000:
+   if len(orisa_tweets) > 10000:
       break
    next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
 #    print(results['search_metadata']['next_results'])
    response = oauth.get(next_search)
    results = json.loads(response.content.decode('utf-8'))
-   dva2_tweets.extend(results['statuses'])
+   orisa_tweets.extend(results['statuses'])
 
-# This line combines all of our different dva queries into one list of tweets
-dva2_tweets = dva2_tweets + dva_tweets
+
+
+#################### QUERY FOR REINHARDT TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+Reinhardt&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention Reinhardt 
+reinhardt_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break
+   if len(reinhardt_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   reinhardt_tweets.extend(results['statuses'])
+
+
+
+#################### QUERY FOR ROADHOG TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+Roadhog&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention Roadhog 
+roadhog_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break
+   if len(roadhog_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   roadhog_tweets.extend(results['statuses'])
+
+
+
+#################### QUERY FOR WINSTON TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+Winston&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention Winston 
+winston_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break 
+   if len(winston_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   winston_tweets.extend(results['statuses'])
 
                 # END OF QUERIES FOR EACH HERO #
 
@@ -111,5 +190,9 @@ dva2_tweets = dva2_tweets + dva_tweets
 # These 4 lines just put all the 'full_text' fields from our list of tweets
 # into a list and prints them with a line break after each tweet for readability.
 # Just testing stuff. Will delete later :D
-texts = [tweet['full_text'] for tweet in dva_tweets]
+tweet_text = [tweet['full_text'] for tweet in dva2_tweets]
+# for tweet in tweet_text:
+#     print(tweet)
+# print(len(tweet_text))
+
 
