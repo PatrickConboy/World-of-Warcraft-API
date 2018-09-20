@@ -182,6 +182,33 @@ while True:
    results = json.loads(response.content.decode('utf-8'))
    winston_tweets.extend(results['statuses'])
 
+
+
+#################### QUERY FOR HAMMOND TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+Hammond&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention Hammond 
+hammond_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break 
+   if len(hammond_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   hammond_tweets.extend(results['statuses'])
+
                 # END OF QUERIES FOR EACH HERO #
 
 
