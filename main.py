@@ -4,6 +4,8 @@
 # Project Description: Web API that provides user access to data analytics on
 # tweets containing mentions of Overwatch and heroes in the game.
 
+# GO HERE FOR API DOCUMENTATION: https://develop.battle.net/documentation/api-reference/world-of-warcraft-community-api
+
 #!/usr/bin/python3
 
 # Accessing the Twitter API
