@@ -12,9 +12,9 @@
 
 # Loading libraries needed for authentication and requests
 import operator
+import json
 from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import BackendApplicationClient
-import json
 
 # In order to use this script, you must:
 # - Have a Twitter account and create an app
@@ -44,8 +44,94 @@ base_url = 'https://api.twitter.com/1.1/'
 # appended to that.
 page = 'search/tweets.json'
 
-# Depending on the query we are interested in, we append the necessary string
-# As you read through the twitter API, you'll find more possibilities
+                # END OF AUTHENTICATION AND OAUTH STUFF #
+
+
+             # BEGINNING OF INDIVIDUAL QUERIES FOR EACH HERO #
+
+#################### QUERY FOR D.VA TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+DVA&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention DVA 
+dva_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break
+   if len(dva_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   dva_tweets.extend(results['statuses'])
+
+
+
+#################### QUERY FOR ORISA TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+Orisa&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention Orisa 
+orisa_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break
+   if len(orisa_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   orisa_tweets.extend(results['statuses'])
+
+
+
+#################### QUERY FOR REINHARDT TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+Reinhardt&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention Reinhardt 
+reinhardt_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break
+   if len(reinhardt_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   reinhardt_tweets.extend(results['statuses'])
+
+
+
+#################### QUERY FOR ROADHOG TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
 req_url = base_url + page + '?q=Overwatch+Roadhog&tweet_mode=extended&count=100'
 
 # We perform a request. Contains standard HTTP information
@@ -55,24 +141,112 @@ response = oauth.get(req_url)
 results = json.loads(response.content.decode('utf-8'))
 
 ## Process the results
-## CAUTION: The following code will attempt to read up to 10000 tweets that
-## Mention Hanover College. You should NOT change this code.
-tweets = results['statuses']
+## The following code will attempt to read up to 10000 tweets that
+## mention Roadhog 
+roadhog_tweets = results['statuses']
 while True:
    if not ('next_results' in results['search_metadata']):
       break
-   if len(tweets) > 10000:
+   if len(roadhog_tweets) > 10000:
       break
    next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
 #    print(results['search_metadata']['next_results'])
    response = oauth.get(next_search)
    results = json.loads(response.content.decode('utf-8'))
-   tweets.extend(results['statuses'])
+   roadhog_tweets.extend(results['statuses'])
+
+
+
+#################### QUERY FOR WINSTON TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+Winston&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention Winston 
+winston_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break 
+   if len(winston_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   winston_tweets.extend(results['statuses'])
+
+
+
+#################### QUERY FOR HAMMOND TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+Hammond&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention Hammond 
+hammond_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break 
+   if len(hammond_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   hammond_tweets.extend(results['statuses'])
+
+
+
+#################### QUERY FOR ZARYA TWEETS ##############################
+# This is where we define what type of tweets we want, via the string below
+req_url = base_url + page + '?q=Overwatch+Zarya&tweet_mode=extended&count=100'
+
+# We perform a request. Contains standard HTTP information
+response = oauth.get(req_url)
+
+# Read the query results
+results = json.loads(response.content.decode('utf-8'))
+
+## Process the results
+## The following code will attempt to read up to 10000 tweets that
+## mention Zarya 
+zarya_tweets = results['statuses']
+while True:
+   if not ('next_results' in results['search_metadata']):
+      break 
+   if len(zarya_tweets) > 10000:
+      break
+   next_search = base_url + page + results['search_metadata']['next_results'] + '&tweet_mode=extended'
+#    print(results['search_metadata']['next_results'])
+   response = oauth.get(next_search)
+   results = json.loads(response.content.decode('utf-8'))
+   zarya_tweets.extend(results['statuses'])
+
+                # END OF QUERIES FOR EACH HERO #
+
+
+            # BEGINNING OF ORGANIZING QUERIES INTO DATA STRUCTURES #
 
 # These 4 lines just put all the 'full_text' fields from our list of tweets
 # into a list and prints them with a line break after each tweet for readability.
 # Just testing stuff. Will delete later :D
-texts = [tweet['full_text'] for tweet in tweets]
-for tweet in texts:
+tweet_text = [tweet['full_text'] for tweet in hammond_tweets]
+for tweet in tweet_text:
     print(tweet)
-    print("    ")
+print(len(tweet_text))
+
+
