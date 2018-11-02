@@ -1,16 +1,15 @@
 # Project for CS328 - Data Management/Data Wrangling
 # Coded by: Od Ganzorig and Patrick Conboy
 # Date Created: 9/18/2018
-# Project Description: Web API that provides user access to data analytics on
-# tweets containing mentions of Overwatch and heroes in the game.
+# Project Description: Web API that provides our user with information on World of Warcraft,
+# the factions, races, classes, abilities, and some statistics.
 
 # GO HERE FOR API DOCUMENTATION: https://develop.battle.net/documentation/api-reference/world-of-warcraft-community-api
 
 #!/usr/bin/python3
 
-# Accessing the Twitter API
-# This script describes the basic methodology for accessing a Twitter feed
-# or something similar.
+# Accessing the Blizzard: World of Warcraft API
+# This script will access the World of Warcraft API 
 
 # Loading libraries needed for authentication and requests
 import operator
@@ -19,7 +18,7 @@ from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import BackendApplicationClient
 
 # In order to use this script, you must:
-# - Have a Twitter account and create an app
+# - Have a Blizzard API account and create an app in order to obtain a clientID and secret
 # - Store in keys.json a property called "blizzardAPI" whose value is an
 #     object with two keys, "clientID" and "secret"
 with open('keys.json', 'r') as f:

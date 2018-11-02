@@ -1,3 +1,3 @@
 Od_Patrick_CS328_Project
 
-hello
+Here we should probably outline how to use our API. This is for the user.
