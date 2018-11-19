@@ -45,7 +45,7 @@ base_url = 'https://us.api.blizzard.com/wow/'
 # appended to that.
 page = 'data/character/races?locale=en_US&access_token=USTncSSBoKRvJ1PGU6la6d6syvxeNyrtqV'
 
-                # END OF AUTHENTICATION AND OAUTH STUFF #
+req_url = base_url + page
 
 
              # BEGINNING OF INDIVIDUAL QUERIES FOR EACH HERO #
