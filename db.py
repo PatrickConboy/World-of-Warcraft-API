@@ -46,6 +46,8 @@ class Db:
                  .filter_by(name=name)\
                  .one_or_none()
 
+   # This method adds a new race to our database when given name, id, faction, and description
+   # Returns the Race object that got added
    def addRace(self, name, id, faction, description):
       newRace = Race(name=name, id=id, faction=faction, description=description)
       self.session.add(newRace)
