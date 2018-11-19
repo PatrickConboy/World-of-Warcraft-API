@@ -31,9 +31,10 @@ class Db:
       Session = sessionmaker(bind=self.engine)
       self.session = Session()
 
+   # Base commit method for our database
    def commit(self):
       self.session.commit()
-
+   # Base rollback method for our database
    def rollback(self):
       self.session.rollback()
 
