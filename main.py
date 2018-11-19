@@ -1,67 +1,146 @@
-# Project for CS328 - Data Management/Data Wrangling
-# Coded by: Od Ganzorig and Patrick Conboy
-# Date Created: 9/18/2018
-# Project Description: Web API that provides our user with information on World of Warcraft,
-# the factions, races, classes, abilities, and some statistics.
+from flask import Flask, request, make_response, json, url_for, abort
+from db import Db   # See db.py
 
-# GO HERE FOR API DOCUMENTATION: https://develop.battle.net/documentation/api-reference/world-of-warcraft-community-api
+app = Flask(__name__)
+db = Db()
+app.debug = True # Comment out when not testing
+app.url_map.strict_slashes = False   # Allows for a trailing slash on routes
 
-#!/usr/bin/python3
+#### ERROR HANDLERS
 
-# Accessing the Blizzard: World of Warcraft API
-# This script will access the World of Warcraft API
+@app.errorhandler(500)
+def server_error(e):
+   return make_json_response({ 'error': 'unexpected server error' }, 500)
 
-# Loading libraries needed for authentication and requests
-import operator
-import json
-from requests_oauthlib import OAuth2Session
-from oauthlib.oauth2 import BackendApplicationClient
+@app.errorhandler(404)
+def not_found(e):
+   return make_json_response({ 'error': e.description }, 404)
 
-# In order to use this script, you must:
-# - Have a Blizzard API account and create an app in order to obtain a clientID and secret
-# - Store in keys.json a property called "blizzardAPI" whose value is an
-#     object with two keys, "clientID" and "secret"
-with open('keys.json', 'r') as f:
-   keys = json.loads(f.read())['blizzardAPI']
+@app.errorhandler(403)
+def forbidden(e):
+   return make_json_response({ 'error': e.description }, 403)
 
-blizzardAPI_clientID = keys['clientID']
-blizzardAPI_secret = keys['secret']
-
-# We authenticate ourselves with the above credentials
-# We will demystify this process later
-#
-# For documentation, see http://requests-oauthlib.readthedocs.io/en/latest/api.html
-# and http://docs.python-requests.org/en/master/
-client = BackendApplicationClient(client_id=blizzardAPI_clientID)
-oauth = OAuth2Session(client=client)
-token = oauth.fetch_token(token_url='https://US.battle.net/oauth/token',
-                          client_id=blizzardAPI_clientID,
-                          client_secret=blizzardAPI_secret)
-
-# Base url needed for all subsequent queries
-base_url = 'https://us.api.blizzard.com/wow/'
-
-# Particular page requested. The specific query string will be
-# appended to that.
-page = 'data/character/races?locale=en_US&access_token=USTncSSBoKRvJ1PGU6la6d6syvxeNyrtqV'
-
-                # END OF AUTHENTICATION AND OAUTH STUFF #
+@app.errorhandler(400)
+def client_error(e):
+   return make_json_response({ 'error': e.description }, 400)
 
 
-             # BEGINNING OF INDIVIDUAL QUERIES FOR EACH HERO #
+#### MAIN ROUTES
+
+@app.route('/', methods = ['GET'])
+def race_list():
+   buckets = db.getBuckets()
+   return make_json_response({
+      "buckets": [
+         {
+            "link": url_for('bucket_contents', bucketId=bucket.id),
+            "description": bucket.description
+         }
+         for bucket in buckets
+      ]
+   })
+
+@app.route('/<bucketId>', methods = ['GET'])
+def bucket_contents(bucketId):
+   bucket = getBucketandCheckPassword(bucketId)
+   return make_json_response({
+      "id": bucket.id,
+      "link": url_for('bucket_contents', bucketId=bucket.id),
+      "description": bucket.description,
+      "shortcuts": [
+         {
+            "linkHash": shortcut.linkHash,
+            "link": url_for('shortcut_get_link', bucketId=bucket.id, hash=shortcut.linkHash),
+            "description": shortcut.description
+         }
+         for shortcut in bucket.shortcuts
+      ]
+   })
 
 
-# This just combines our base_url and page into our request_url
-req_url = base_url + page
 
-# We perform a request. Contains standard HTTP information
-response = oauth.get(req_url)
-# print(response.content)
+## HELPER METHODS
 
-# Read the query results
-results = json.loads(response.content.decode('utf-8'))
-print(results['races'][0])
+## Helper method for creating JSON responses
+def make_json_response(content, response = 200, headers = {}):
+   headers['Content-Type'] = 'application/json'
+   return make_response(json.dumps(content), response, headers)
 
-for race in results['races']:
-  print(race['name'])
+# Check if bucket exists, password is correct, and returns bucket object
+# Returns proper error codes if any issues noticed in the request
+def getBucketandCheckPassword(bucketId):
+   bucket = checkBucketId(bucketId)
+   password = getPasswordFromQuery()
+   passHash = utils.getHash(password)
+   if password is not None and bucket.passwordHash != passHash:
+      abort(403, 'incorrect password')
+   return bucket
 
+# Small function that checks if the requests bucketId exists, if it doesn't, returns None or 404
+def checkBucketId(bucketId):
+   if bucketId is None:
+      return None
+   bucket = db.getBucket(bucketId)
+   if bucket is None:
+      abort(404, 'unknown bucketId')
+   return bucket
+
+# Checks if the bucketId is available and returns 403 if it already exists
+def checkBucketIdAvailable(bucketId):
+   bucket = db.getBucket(bucketId)
+   if bucket is not None:
+      abort(403, 'bucketId already exists')
+
+# Check if a password was given in the request, returns 403 if no password given
+def getPasswordFromQuery():
+   if "password" not in request.args:
+      abort(403, 'must provide a password parameter')
+   return request.args["password"]
+
+# Checks if password exists in contents, returns 403 if password isn't provided
+# If password is provided, returns the password
+def getPasswordFromContents():
+   contents = request.get_json()
+   if contents == None or "password" not in contents:
+      abort(403, 'must provide a password field')
+   return contents["password"]
+
+# Checks if "description" in contents and either returns the given description
+# or returns None if no description found
+def getDescriptionFromContents():
+   contents = request.get_json()
+   if "description" in contents:
+      description = contents["description"]
+   else:
+      description = None
+   return description
+
+# Checks if link is in given contents.
+# If no link given, returns 403 stating error
+def getLinkFromContents():
+   contents = request.get_json()
+   if "link" in contents:
+      link = contents["link"]
+   else:
+      abort(403, 'must provide link in request')
+   return link
+
+# Checks if shortcut exists in the given bucket, returns 404 if shortcut not found
+# If shortcut is found, returns the shortcut object
+def checkShortcut(bucketId, hash):
+   bucket = checkBucketId(bucketId)
+   shortcut = db.getShortcut(hash, bucket)
+   if shortcut == None:
+      abort(404, 'shortcut does not exist')
+   return shortcut
+
+# Check for existing shortcut with given hash and bucket
+# If one exists, return 403 indicating hash is already used
+def checkIfHashInUse(bucket, hash):
+   shortcut = db.getShortcut(hash, bucket)
+   if shortcut != None:
+      abort(403, 'hash is already used')
+
+# Starts the application
+if __name__ == "__main__":
+   app.run()
