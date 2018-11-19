@@ -22,6 +22,8 @@ r = client.get('/race')
 assert(r.status_code == 200)
 contents = get_json(r)
 assert("races" in contents)
+r = client.get('/race' + 'wah')
+assert(r.status_code == 404)
 
 # TODO: Add API tests for '/race/<race>'
 
