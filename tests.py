@@ -1,5 +1,4 @@
-from main import app
-from web_requests import db
+from main import app, db
 import json
 
 
