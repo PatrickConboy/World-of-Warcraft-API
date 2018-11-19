@@ -32,6 +32,12 @@ blizzardAPI_secret = keys['secret']
 #
 # For documentation, see http://requests-oauthlib.readthedocs.io/en/latest/api.html
 # and http://docs.python-requests.org/en/master/
+client = BackendApplicationClient(client_id=blizzardAPI_clientID)
+oauth = OAuth2Session(client=client)
+token = oauth.fetch_token(token_url='https://api.twitter.com/oauth2/token',
+                          client_id=blizzardAPI_clientID,
+                          client_secret=blizzardAPI_secret)
+
 client = BackendApplicationClient(client_id=twitter_key)
 oauth = OAuth2Session(client=client)
 token = oauth.fetch_token(token_url='https://api.twitter.com/oauth2/token',
