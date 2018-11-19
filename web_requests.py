@@ -51,4 +51,3 @@ results = json.loads(response.content.decode('utf-8'))
 for race in results['races']:
    db.addRace(race['name'], race['id'], race['side'], "test")
    db.commit()
-#print(db.getRaces())
