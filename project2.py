@@ -60,8 +60,8 @@ response = oauth.get(req_url)
 
 # Read the query results
 results = json.loads(response.content.decode('utf-8'))
-print(results['races'][0])
+# print(results['races'][0])
 
-for race in results['races']:
-  print(race['name'])
+# for race in results['races']:
+#   print(race['name'])
 
