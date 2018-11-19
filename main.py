@@ -36,6 +36,7 @@ def client_error(e):
 
 #### MAIN ROUTES
 
+# This route '/race' allows user to get the list of all the races in our database
 @app.route('/race', methods = ['GET'])
 def race_list():
    races = db.getRaces()
@@ -50,6 +51,8 @@ def race_list():
       ]
    })
 
+# This route '/race/<race>' allows user to get a specific race from the database when they
+# pass in a race name
 @app.route('/race/<race>', methods = ['GET'])
 def race_info(raceName):
    race = db.getRace(raceName)
