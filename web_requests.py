@@ -1,14 +1,3 @@
-# Project for CS328 - Data Management/Data Wrangling
-# Coded by: Od Ganzorig and Patrick Conboy
-# Date Created: 9/18/2018
-# Project Description: Web API that provides our user with information on World of Warcraft,
-# the factions, races, classes, abilities, and some statistics.
-
-# GO HERE FOR API DOCUMENTATION: https://develop.battle.net/documentation/api-reference/world-of-warcraft-community-api
-
-#!/usr/bin/python3
-
-# Accessing the Blizzard: World of Warcraft API
 # This script will access the World of Warcraft API
 
 # Loading libraries needed for authentication and requests
@@ -17,6 +6,7 @@ import json
 from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import BackendApplicationClient
 from db import Db   # See db.py
+import db
 
 db = Db()
 
@@ -48,21 +38,16 @@ base_url = 'https://us.api.blizzard.com/wow/'
 # appended to that.
 page = 'data/character/races?locale=en_US&access_token=USTncSSBoKRvJ1PGU6la6d6syvxeNyrtqV'
 
-
 # This just combines our base_url and page into our request_url
 req_url = base_url + page
 
 # We perform a request. Contains standard HTTP information
 response = oauth.get(req_url)
-# print(response.content)
 
 # Read the query results
 results = json.loads(response.content.decode('utf-8'))
-# print(results['races'][0])
 
+# Puts all the information for the individual races into our database
 for race in results['races']:
-#   print(race['name'])
    db.addRace(race['name'], race['id'], race['side'], "test")
    db.commit()
-
-
