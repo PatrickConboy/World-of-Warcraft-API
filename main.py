@@ -45,23 +45,27 @@ def race_list():
          {
             "name": race.name,
             "faction": race.faction,
-            "description": race.description
+            "description": race.description,
+            "link": url_for('race_info', raceName=race.name)
          }
          for race in races
       ]
    })
 
-# This route '/race/<race>' allows user to get a specific race from the database when they
+# This route '/race/<raceName>' allows user to get a specific race from the database when they
 # pass in a race name
-@app.route('/race/<race>', methods = ['GET'])
+@app.route('/race/<raceName>', methods = ['GET'])
 def race_info(raceName):
+   if raceName is None:
+      abort(404, 'must provide race name')
    race = db.getRace(raceName)
-   if race == None:
-       abort(404, 'Race not found in database')
+   if race is None:
+       abort(404, 'unknown race name')
    return make_json_response({
       "name": race.name,
       "faction": race.faction,
-      "description": race.description
+      "description": race.description,
+      "link": url_for('race_info', raceName=race.name)
    })
 
 
