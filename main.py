@@ -56,6 +56,8 @@ def race_list():
 @app.route('/race/<race>', methods = ['GET'])
 def race_info(raceName):
    race = db.getRace(raceName)
+   if race == None:
+       abort(403, 'Race not found in database')
    return make_json_response({
       "name": race.name,
       "faction": race.faction,
