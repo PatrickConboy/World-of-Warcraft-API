@@ -13,11 +13,18 @@ print("###############  DB TESTS DONE ##################")
 
 
 print("###############   API TESTS    ##################")
-
-# TODO: Add API tests
-
-print("############### API TESTS DONE ##################")
-
 client = app.test_client()
 def get_json(r):
    return json.loads(r.get_data().decode("utf-8"))
+
+print("Testing '/race' method...")
+r = client.get('/race')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert("races" in contents)
+
+# TODO: Add API tests for '/race/<race>'
+
+# TODO: Add more API tests
+
+print("############### API TESTS DONE ##################")
