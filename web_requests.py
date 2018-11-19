@@ -8,7 +8,7 @@ from oauthlib.oauth2 import BackendApplicationClient
 from db import Db   # See db.py
 import db
 
-db = Db()
+db = Db(True)
 
 # In order to use this script, you must:
 # - Have a Blizzard API account and create an app in order to obtain a clientID and secret
@@ -51,3 +51,4 @@ results = json.loads(response.content.decode('utf-8'))
 for race in results['races']:
    db.addRace(race['name'], race['id'], race['side'], "test")
    db.commit()
+#print(db.getRaces())

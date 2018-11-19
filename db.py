@@ -20,13 +20,14 @@ class Race(Base):
 
 # Represents the database and our interaction with it
 class Db:
-   def __init__(self):
+   def __init__(self, refresh = False):
       engineName = 'sqlite:///test.db'   # Uses in-memory database
       self.engine = create_engine(engineName)
       self.metadata = Base.metadata
       self.metadata.bind = self.engine
-      self.metadata.drop_all(bind=self.engine)
-      self.metadata.create_all(bind=self.engine)
+      if refresh:
+         self.metadata.drop_all(bind=self.engine)
+         self.metadata.create_all(bind=self.engine)
       Session = sessionmaker(bind=self.engine)
       self.session = Session()
 
@@ -52,4 +53,3 @@ class Db:
       newRace = Race(name=name, id=id, faction=faction, description=description)
       self.session.add(newRace)
       return newRace
-      

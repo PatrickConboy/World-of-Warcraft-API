@@ -1,9 +1,12 @@
 from main import app, db
 import json
 
+session = db.session
 
 print("###############    DB TESTS    ##################")
+
 assert(len(db.getRaces()) == 21)
+#print(db.getRaces())
 
 # TODO: Add more DB tests
 
