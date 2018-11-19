@@ -4,9 +4,8 @@ import json
 session = db.session
 
 print("###############    DB TESTS    ##################")
-
+# Testing to see if our data is in the data base and db methods work
 assert(len(db.getRaces()) == 21)
-#print(db.getRaces())
 
 # TODO: Add more DB tests
 
