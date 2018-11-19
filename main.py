@@ -12,9 +12,9 @@ import web_requests
 from db import Db   # See db.py
 
 app = Flask(__name__)
+db = Db()
 app.debug = True # Comment out when not testing
 app.url_map.strict_slashes = False   # Allows for a trailing slash on routes
-
 #### ERROR HANDLERS
 
 @app.errorhandler(500)
@@ -36,13 +36,28 @@ def client_error(e):
 
 #### MAIN ROUTES
 
-@app.route('/', methods = ['GET'])
+@app.route('/race', methods = ['GET'])
 def race_list():
-   pass
+   races = db.getRaces()
+   return make_json_response({
+      "races": [
+         {
+            "name": race.name,
+            "faction": race.faction,
+            "description": race.description
+         }
+         for race in races
+      ]
+   })
 
-@app.route('/<bucketId>', methods = ['GET'])
-def race_contents(bucketId):
-   pass
+@app.route('/race/<race>', methods = ['GET'])
+def race_info(raceName):
+   race = db.getRace(raceName)
+   return make_json_response({
+      "name": race.name,
+      "faction": race.faction,
+      "description": race.description
+   })
 
 
 
