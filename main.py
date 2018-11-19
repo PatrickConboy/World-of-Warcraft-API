@@ -57,7 +57,7 @@ def race_list():
 def race_info(raceName):
    race = db.getRace(raceName)
    if race == None:
-       abort(403, 'Race not found in database')
+       abort(404, 'Race not found in database')
    return make_json_response({
       "name": race.name,
       "faction": race.faction,
