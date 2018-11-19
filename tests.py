@@ -7,7 +7,7 @@ print("###############    DB TESTS    ##################")
 # Testing to see if our data is in the data base and db methods work
 assert(len(db.getRaces()) == 21)
 
-# TODO: Add more DB tests
+# TODO: Add more in depth DB tests
 
 print("###############  DB TESTS DONE ##################")
 
@@ -44,8 +44,8 @@ assert(contents['link'] == '/race/Troll')
 assert(contents['description'] == 'test')
 assert(contents['faction'] == 'horde')
 
-# TODO: Add API tests for '/race/<race>'
+# TODO: Add API tests for any new methods we implement
 
-# TODO: Add more API tests
+# TODO: Add more in depth API tests
 
 print("############### API TESTS DONE ##################")

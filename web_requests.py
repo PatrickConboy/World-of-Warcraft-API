@@ -51,3 +51,10 @@ results = json.loads(response.content.decode('utf-8'))
 for race in results['races']:
    db.addRace(race['name'], race['id'], race['side'], "test")
    db.commit()
+
+# TODO: Setup query for obtaining class info from blizzard API
+# Basically do what we did above, but for class instead of race
+
+# TODO: Setup query for obtaining faction info from wikipedia 
+# Use this link for how to do that and read the second answer that talks about the wikipedia Python library
+# https://stackoverflow.com/questions/4460921/extract-the-first-paragraph-from-a-wikipedia-article-python

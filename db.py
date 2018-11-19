@@ -18,6 +18,20 @@ class Race(Base):
    def __repr__(self):
       return "<Race: {0} -- Faction: {1}>".format(self.name, self.faction)
 
+
+
+
+class Faction(Base):
+   pass
+   # TODO: Implement faction database class
+
+class Class(Base):
+   pass
+   # TODO: Implement class database class
+
+
+
+
 # Represents the database and our interaction with it
 class Db:
    def __init__(self, refresh = False):
@@ -54,3 +68,8 @@ class Db:
       newRace = Race(name=name, id=id, faction=faction, description=description)
       self.session.add(newRace)
       return newRace
+
+
+   # TODO: Implement add and get methods for faction
+
+   # TODO: Implement add and get methods for class

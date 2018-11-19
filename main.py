@@ -69,6 +69,14 @@ def race_info(raceName):
    })
 
 
+# TODO: Setup @app.route for /faction and /faction/factionName
+
+# TODO: Setup @app.route for /class and /className
+
+# TODO: Possibly implement extra routes for something like /race/raceName/class 
+# This would let you see what classes are playable for that specific race
+# Might need to implement a few extra routes like this
+
 
 ## HELPER METHODS
 
