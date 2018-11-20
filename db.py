@@ -21,15 +21,17 @@ class Race(Base):
 
 
 
-class Faction(Base):
-   pass
-   # TODO: Implement faction database class
+# class Faction(Base):
+#    pass
+#    # TODO: Implement faction database class
 
 class Class(Base):
-   pass
-   # TODO: Implement class database class
+   __tablename__ = 'classes'
 
+   className = Column(String(20), nullable = False, primary_key = True)
 
+   def __repr__(self):
+      return "<Class Name: {0}>".format(self.className)
 
 
 # Represents the database and our interaction with it
@@ -73,3 +75,11 @@ class Db:
    # TODO: Implement add and get methods for faction
 
    # TODO: Implement add and get methods for class
+   def getClasses(self):
+      pass
+
+   def getClass(self, className):
+      pass
+
+   def addClass(self, className):
+      pass
