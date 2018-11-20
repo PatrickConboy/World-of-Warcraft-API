@@ -68,10 +68,35 @@ def race_info(raceName):
       "link": url_for('race_info', raceName=race.name)
    })
 
+# TODO: Setup @app.route for /class and /className
+@app.route('/class', methods = ['GET'])
+def class_list():
+   classes = db.getClasses()
+   return make_json_response({
+      "classes": [
+         {
+            "class name": eachClass.name,
+            "power type": eachClass.powerType,
+            "link": url_for('class_info', className=eachClass.name)
+         }
+         for eachClass in classes
+      ]
+   })
+
+@app.route('/class/<className>', methods = ['GET'])
+def class_info(className):
+   if className is None:
+      abort(404, 'must provide class name')
+   givenClass = db.getClass(className)
+   if givenClass is None:
+       abort(404, 'unknown class name')
+   return make_json_response({
+      "class name": givenClass.name,
+      "power type": givenClass.powerType,
+      "link": url_for('class_info', className=givenClass.name)
+   })
 
 # TODO: Setup @app.route for /faction and /faction/factionName
-
-# TODO: Setup @app.route for /class and /className
 
 # TODO: Possibly implement extra routes for something like /race/raceName/class 
 # This would let you see what classes are playable for that specific race

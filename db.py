@@ -23,16 +23,18 @@ class Race(Base):
 
 
 
-class Faction(Base):
-   __tablename__ = 'factions'
+# class Faction(Base):
+#    pass
+#    # TODO: Implement faction database class
 
-   name        = Column(String(20), nullable = False, primary_key = True)
-   description = Column(String(500))
+class Class(Base):
+   __tablename__ = 'classes'
 
-   race        = relationship("Race", back_populates='faction')
+   name      = Column(String(20), nullable = False, primary_key = True)
+   powerType = Column(String(20), nullable = False)
 
    def __repr__(self):
-      return "<Faction: {0} -- Description: {1}>".format(self.name, self.description)
+      return "<Class Name: {0} -- Power Type: {1}>".format(self.name, self.powerType)
 
 # class Class(Base):
 #    __tablename__ = 'classes'
@@ -62,6 +64,9 @@ class Db:
    def rollback(self):
       self.session.rollback()
 
+
+   ########## METHODS FOR RACE CLASS ###########
+
    # Returns the list of all races
    def getRaces(self):
       return self.session.query(Race).all()
@@ -80,6 +85,25 @@ class Db:
       return newRace
 
 
-   # TODO: Implement add and get methods for faction
+   ########## METHODS FOR CLASS CLASS ###########
 
-   # TODO: Implement add and get methods for class
+   # Returns the list of all classes
+   def getClasses(self):
+      return self.session.query(Class).all()
+
+   # Returns a specific class when given a class name
+   def getClass(self, name):
+      return self.session.query(Class)\
+                 .filter_by(name=name)\
+                 .one_or_none()
+
+   # This method adds a new class to our database when given a className and powerType
+   # Returns the Class object that got added
+   def addClass(self, name, powerType):
+      newClass = Class(name=name, powerType=powerType)
+      self.session.add(newClass)
+      return newClass
+
+
+   ########## METHODS FOR FACTION CLASS ###########
+   # TODO: Implement add and get methods for faction
