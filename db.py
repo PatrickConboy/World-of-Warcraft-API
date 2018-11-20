@@ -29,9 +29,10 @@ class Class(Base):
    __tablename__ = 'classes'
 
    className = Column(String(20), nullable = False, primary_key = True)
+   powerType = Column(String(20), nullable = False)
 
    def __repr__(self):
-      return "<Class Name: {0}>".format(self.className)
+      return "<Class Name: {0} -- Power Type: {1}>".format(self.className, self.powerType)
 
 
 # Represents the database and our interaction with it
