@@ -12,8 +12,10 @@ class Race(Base):
 
    name        = Column(String(20), nullable = False, primary_key = True)
    id          = Column(Integer, nullable = False, primary_key = True)
-   faction     = Column(String(10), nullable = False)
+   # faction      = Column(String(10), nullable = False)
    description = Column(String(200))
+
+   faction     = relationship("Faction", back_populates='race') 
 
    def __repr__(self):
       return "<Race: {0} -- Faction: {1}>".format(self.name, self.faction)
@@ -22,12 +24,20 @@ class Race(Base):
 
 
 class Faction(Base):
-   pass
-   # TODO: Implement faction database class
+   __tablename__ = 'factions'
 
-class Class(Base):
-   pass
-   # TODO: Implement class database class
+   name        = Column(String(20), nullable = False, primary_key = True)
+   description = Column(String(500))
+
+   race        = relationship("Race", back_populates='faction')
+
+   def __repr__(self):
+      return "<Faction: {0} -- Description: {1}>".format(self.name, self.description)
+
+# class Class(Base):
+#    __tablename__ = 'classes'
+   
+
 
 
 
