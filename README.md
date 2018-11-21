@@ -8,11 +8,13 @@
                             
                     API Paths
 
-/race
-/race/<raceName>
+/race -- done
+/race/<raceName> -- done
+/race/<raceName>/class -- TODO
 
-/class
-/class/<className>
+/class -- done
+/class/<className> -- done
 
-/faction
-/faction/<factionName>
+/faction -- TODO
+/faction/<factionName> -- TODO
+/faction/race -- TODO

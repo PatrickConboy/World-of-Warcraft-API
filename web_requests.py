@@ -1,4 +1,5 @@
-# This script will access the World of Warcraft API
+# This file will pull data from various websites and APIs and then put
+# that data into our local database.
 
 # Loading libraries needed for authentication and requests
 import operator
