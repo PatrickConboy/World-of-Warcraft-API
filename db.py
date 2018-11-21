@@ -22,10 +22,13 @@ class Race(Base):
 
 
 
+# Class for Factions. The two factions have a name and description.
+# Need to figure out how to implement relationship (foreign key) between Race and Faction classes
+# class Faction(Base): 
+   # TODO: Implement faction database class
+   # TODO: Make sure to implement relationship with "faction" in the Race class above
 
-# class Faction(Base):
-#    pass
-#    # TODO: Implement faction database class
+
 
 class Class(Base):
    __tablename__ = 'classes'
@@ -35,13 +38,6 @@ class Class(Base):
 
    def __repr__(self):
       return "<Class Name: {0} -- Power Type: {1}>".format(self.name, self.powerType)
-
-# class Class(Base):
-#    __tablename__ = 'classes'
-   
-
-
-
 
 
 # Represents the database and our interaction with it
