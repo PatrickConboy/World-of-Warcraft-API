@@ -25,12 +25,12 @@ base_url = 'http://127.0.0.1:5000'
 
 # Testing a GET on /race
 print("   Testing '/race' path...")
+r = client.get('/race' + 'wah')
+assert(r.status_code == 404)
 r = client.get('/race')
 assert(r.status_code == 200)
 contents = get_json(r)
 assert("races" in contents)
-r = client.get('/race' + 'wah')
-assert(r.status_code == 404)
 
 # Testing a GET on /race/Human
 print("   Testing '/race/<raceName>' path...")
