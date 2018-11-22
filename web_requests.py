@@ -75,9 +75,19 @@ results = json.loads(response.content.decode('utf-8'))
 
 # Puts each class into our database
 for eachClass in results['classes']:
-   db.addClass(eachClass['name'], eachClass['powerType'])
+   className = eachClass['name']
+   if className == 'Warrior' or className == 'Death Knight' or className == 'Demon Hunter':
+      db.addClass(eachClass['name'], eachClass['powerType'], "DPS, Tank")
+   elif className == 'Druid' or className == 'Monk' or className == 'Paladin':
+      db.addClass(eachClass['name'], eachClass['powerType'], "DPS, Tank, Healer")
+   elif className == 'Shaman' or className == 'Priest':
+      db.addClass(eachClass['name'], eachClass['powerType'], "DPS, Healer")
+   elif className == 'Rogue' or className == 'Warlock' or className == 'Mage' or className == 'Hunter':
+      db.addClass(eachClass['name'], eachClass['powerType'], "DPS")
    db.commit()
+print(db.getClasses())
 
+db.updateClass()
 
 ############## Query for Wikipedia WoW Factions ################
 
