@@ -55,8 +55,18 @@ def race_info(raceName):
    return make_json_response({
       "name": race.name,
       "faction": race.faction,
-      "description": race.description,
       "link": url_for('race_info', raceName=race.name)
+   })
+
+@app.route('/race/<raceName>/description', methods = ['GET'])
+def race_description(raceName):
+   if raceName is None:
+      abort(404, 'must provide race name')
+   race = db.getRace(raceName)
+   if race is None:
+       abort(404, 'unknown race name')
+   return make_json_response({
+      "description": race.description
    })
 
 # TODO: Setup @app.route for /class and /className
