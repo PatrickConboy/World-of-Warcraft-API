@@ -17,8 +17,8 @@ class Race(Base):
    id = Column(Integer, nullable = False, primary_key = True)
    faction = Column(String(10), nullable = False)
    description = Column(String(200))
-   faction = relationship("Faction", back_populates = "race")
-   classes = relationship("Class", back_populates="races")
+   #faction = relationship("Faction", back_populates = "race")
+   #classes = relationship("Class", back_populates="races")
 
    def __repr__(self):
       return "<Race: {0} -- Faction: {1}>".format(self.name, self.faction)
@@ -32,7 +32,7 @@ class Faction(Base):
 
    name = Column(String(20), nullable = False, primary_key = True)
    description = Column(String(200))
-   race = relationship("Race", back_populates = "faction")
+   #race = relationship("Race", back_populates = "faction")
 
 
    def __repr__(self):
@@ -44,11 +44,19 @@ class Class(Base):
 
    name      = Column(String(20), nullable = False, primary_key = True)
    powerType = Column(String(20), nullable = False)
-   races = relationship("Race", back_populates="classes")
+   #races = relationship("Race", back_populates="classes")
 
    def __repr__(self):
       return "<Class Name: {0} -- Power Type: {1}>".format(self.name, self.powerType)
 
+
+class Battlegroup(Base):
+   __tablename__ = 'battlegroups'
+
+   name = Column(String(20), nullable = False, primary_key = True)
+
+   def __repr__(self):
+      return "<Battlegroup Name: {0}>".format(self.name)
 
 # Represents the database and our interaction with it
 class Db:
@@ -109,6 +117,18 @@ class Db:
       newClass = Class(name=name, powerType=powerType)
       self.session.add(newClass)
       return newClass
+
+
+   ########## METHODS FOR CLASS BATTLEGROUP ###########
+
+
+   def getBattlegroups(self):
+      return self.session.query(Battlegroup).all()
+
+   def addBattlegroup(self, name):
+      newbg = Battlegroup(name=name)
+      self.session.add(newbg)
+      return newbg
 
 
    ########## METHODS FOR FACTION CLASS ###########

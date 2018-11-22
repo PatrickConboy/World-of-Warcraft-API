@@ -11,6 +11,9 @@ assert(len(db.getRaces()) == 21)
 print("   Testing Class methods...")
 assert(len(db.getClasses()) == 12)
 
+print("   Testing Battlegroup methods...")
+assert(len(db.getBattlegroups()) == 9)
+
 # TODO: Add more in depth DB tests
 
 print("###############  DB TESTS DONE ##################")
@@ -78,6 +81,15 @@ contents = get_json(r)
 assert(contents['class name'] == 'Death Knight')
 assert(contents['link'] == '/class/Death%20Knight')
 assert(contents['power type'] == 'runic-power')
+
+# Testing a GET on /battlegroup
+print("   Testing '/battlegroup' path...")
+r = client.get('/battlegroup')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert("battlegroups" in contents)
+assert(len(contents["battlegroups"]) == 9)
+
 
 # TODO: Add API tests for any new methods we implement
 

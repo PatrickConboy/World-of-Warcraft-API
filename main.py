@@ -89,6 +89,22 @@ def class_info(className):
       "link": url_for('class_info', className=givenClass.name)
    })
 
+
+# TODO: Setup @app.route for /battlegroup
+@app.route('/battlegroup', methods = ['GET'])
+def battlegroup_list():
+   battlegroups = db.getBattlegroups()
+   return make_json_response({
+      "battlegroups": [
+         {
+            "battlegroup name": bg.name
+         }
+         for bg in battlegroups
+      ]
+   })
+
+
+
 # TODO: Setup @app.route for /faction and /faction/factionName
 
 #@app.route('/faction', methods = ['GET'])
