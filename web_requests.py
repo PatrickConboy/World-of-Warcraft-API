@@ -79,6 +79,17 @@ for eachClass in results['classes']:
    db.commit()
 
 
+
+############## Query for WoW API Battlegroups ################
+page = 'data/battlegroups/?locale=en_US&access_token=USZbPYtne1FhueFiwAR7PKRHU8ODXtGwTq'
+req_url = base_url + page
+response = oauth.get(req_url)
+results = json.loads(response.content.decode('utf-8'))
+for bg in results['battlegroups']:
+	db.addBattlegroup(bg['name'])
+	db.commit()
+
+
 ############## Query for Wikipedia WoW Factions ################
 
 # TODO: Setup query for obtaining faction info from wikipedia 

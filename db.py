@@ -13,13 +13,12 @@ Base = declarative_base()
 class Race(Base):
    __tablename__ = 'races'
 
-   name        = Column(String(20), nullable = False, primary_key = True)
-   id          = Column(Integer, nullable = False, primary_key = True)
-   faction      = Column(String(10), nullable = False)
+   name = Column(String(20), nullable = False, primary_key = True)
+   id = Column(Integer, nullable = False, primary_key = True)
+   faction = Column(String(10), nullable = False)
    description = Column(String(200))
-
-#    faction     = relationship("Faction", back_populates='race') 
-#    classes = relationship("Class", back_populates='races')
+   #faction = relationship("Faction", back_populates = "race")
+   #classes = relationship("Class", back_populates="races")
 
    def __repr__(self):
       return "<Race: {0} -- Faction: {1}>".format(self.name, self.faction)
@@ -27,11 +26,17 @@ class Race(Base):
 
 
 # Class for Factions. The two factions have a name and description.
-# Need to figure out how to implement relationship (foreign key) between Race and Faction classes
-# class Faction(Base): 
-   # TODO: Implement faction database class
-   # TODO: Make sure to implement relationship with "faction" in the Race class above
+# Need to figure out how to implement relationship (foreign key) between Race and Faction classes 
+class Faction(Base):
+   __tablename__ = 'factions'
 
+   name = Column(String(20), nullable = False, primary_key = True)
+   description = Column(String(200))
+   #race = relationship("Race", back_populates = "faction")
+
+
+   def __repr__(self):
+      return "<Faction: {0}>".format(self.name)
 
 
 class Class(Base):
@@ -39,12 +44,19 @@ class Class(Base):
 
    name      = Column(String(20), nullable = False, primary_key = True)
    powerType = Column(String(20), nullable = False)
-
-#    races = relationship("Race", back_populates='classes')
+   #races = relationship("Race", back_populates="classes")
 
    def __repr__(self):
       return "<Class Name: {0} -- Power Type: {1}>".format(self.name, self.powerType)
 
+
+class Battlegroup(Base):
+   __tablename__ = 'battlegroups'
+
+   name = Column(String(20), nullable = False, primary_key = True)
+
+   def __repr__(self):
+      return "<Battlegroup Name: {0}>".format(self.name)
 
 # Represents the database and our interaction with it
 class Db:
@@ -107,5 +119,23 @@ class Db:
       return newClass
 
 
+   ########## METHODS FOR CLASS BATTLEGROUP ###########
+
+
+   def getBattlegroups(self):
+      return self.session.query(Battlegroup).all()
+
+   def addBattlegroup(self, name):
+      newbg = Battlegroup(name=name)
+      self.session.add(newbg)
+      return newbg
+
+
    ########## METHODS FOR FACTION CLASS ###########
-   # TODO: Implement add and get methods for faction
+   def getFactions(self):
+      return self.session.query(Faction).all()
+
+   def getFaction(self, name):
+      return self.session.query(Faction)\
+                 .filter_by(name=name)\
+                 .one_or_none()
