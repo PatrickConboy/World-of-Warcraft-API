@@ -31,6 +31,9 @@ r = client.get('/race')
 assert(r.status_code == 200)
 contents = get_json(r)
 assert("races" in contents)
+assert(len(contents["races"]) == 21)
+assert(contents["races"][0]["name"] == "Human")
+assert(contents["races"][0]["faction"] == "alliance")
 
 # Testing a GET on /race/Human
 print("   Testing '/race/<raceName>' path...")
@@ -51,12 +54,15 @@ assert(contents['faction'] == 'horde')
 
 # Testing a GET on /class
 print("   Testing '/class' path...") 
+r = client.get('/class' + 'wah')
+assert(r.status_code == 404)
 r = client.get('/class')
 assert(r.status_code == 200)
 contents = get_json(r)
 assert("classes" in contents)
-r = client.get('/class' + 'wah')
-assert(r.status_code == 404)
+assert(len(contents["classes"]) == 12)
+assert(contents["classes"][0]["class name"] == "Warrior")
+assert(contents["classes"][0]["power type"] == "rage")
 
 # Testing a GET on /class/Warrior
 print("   Testing '/class/<className>' path...")
