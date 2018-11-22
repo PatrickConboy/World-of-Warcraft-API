@@ -16,7 +16,7 @@ class Race(Base):
    name        = Column(String(20), nullable = False, primary_key = True)
    id          = Column(Integer, nullable = False, primary_key = True)
    faction     = Column(String(10), nullable = False)
-   description = Column(String(200)) ## TODO: Need to add in descriptions!
+   description = Column(String(200))
 
    #faction = relationship("Faction", back_populates = "race")
    #classes = relationship("Class", back_populates="races")
