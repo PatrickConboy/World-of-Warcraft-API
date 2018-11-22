@@ -13,10 +13,11 @@ Base = declarative_base()
 class Race(Base):
    __tablename__ = 'races'
 
-   name = Column(String(20), nullable = False, primary_key = True)
-   id = Column(Integer, nullable = False, primary_key = True)
-   faction = Column(String(10), nullable = False)
+   name        = Column(String(20), nullable = False, primary_key = True)
+   id          = Column(Integer, nullable = False, primary_key = True)
+   faction     = Column(String(10), nullable = False)
    description = Column(String(200))
+
    #faction = relationship("Faction", back_populates = "race")
    #classes = relationship("Class", back_populates="races")
 
@@ -30,7 +31,7 @@ class Race(Base):
 class Faction(Base):
    __tablename__ = 'factions'
 
-   name = Column(String(20), nullable = False, primary_key = True)
+   name        = Column(String(20), nullable = False, primary_key = True)
    description = Column(String(200))
    #race = relationship("Race", back_populates = "faction")
 
@@ -121,10 +122,11 @@ class Db:
 
    ########## METHODS FOR CLASS BATTLEGROUP ###########
 
-
+   # This methods returns the list of battlegroups in WoW
    def getBattlegroups(self):
       return self.session.query(Battlegroup).all()
 
+   # This method allows us to add a battlegroup to our database
    def addBattlegroup(self, name):
       newbg = Battlegroup(name=name)
       self.session.add(newbg)
@@ -132,9 +134,13 @@ class Db:
 
 
    ########## METHODS FOR FACTION CLASS ###########
+
+   # This method returns the list of factions in WoW
    def getFactions(self):
       return self.session.query(Faction).all()
 
+   # This method returns information on one of the two factions
+   # User gives name of which faction they want to learn about
    def getFaction(self, name):
       return self.session.query(Faction)\
                  .filter_by(name=name)\
