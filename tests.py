@@ -18,6 +18,7 @@ assert(len(db.getBattlegroups()) == 9)
 
 print("###############  DB TESTS DONE ##################")
 
+print(" ")
 
 print("###############   API TESTS    ##################")
 client = app.test_client()
@@ -43,7 +44,6 @@ r = client.get(base_url + '/race/Human')
 contents = get_json(r)
 assert(contents['name'] == 'Human')
 assert(contents['link'] == '/race/Human')
-assert(contents['description'] == 'test')
 assert(contents['faction'] == 'alliance')
 
 # Testing a GET on /race/Troll
@@ -51,8 +51,17 @@ r = client.get(base_url + '/race/Troll')
 contents = get_json(r)
 assert(contents['name'] == 'Troll')
 assert(contents['link'] == '/race/Troll')
-assert(contents['description'] == 'test')
 assert(contents['faction'] == 'horde')
+
+# Testing a GET on /race/Human/description
+print("   Testing '/race/<raceName>/description' path...")
+r = client.get(base_url + '/race/Dog/description')
+assert(r.status_code == 404)
+r = client.get(base_url + '/race/Human/description')
+contents = get_json(r)
+assert('description' in contents)
+assert(contents['description'] == "Recent discoveries have shown that humans are descended from the barbaric vrykul, half-giant warriors who live in Northrend. Early humans were primarily a scattered and tribal people for several millennia, until the rising strength of the troll empire forced their strategic unification. Thus the nation of Arathor was formed, along with its capital, the city-state of Strom.")
+
 
 # Testing a GET on /class
 print("   Testing '/class' path...") 
