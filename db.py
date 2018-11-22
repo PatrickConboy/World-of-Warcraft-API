@@ -22,7 +22,7 @@ class Race(Base):
    #classes = relationship("Class", back_populates="races")
 
    def __repr__(self):
-      return "<Race: {0} -- Faction: {1}>".format(self.name, self.faction)
+      return "<Race: {0}>".format(self.name)
 
 
 
