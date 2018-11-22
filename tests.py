@@ -78,7 +78,6 @@ contents = get_json(r)
 assert("classes" in contents)
 assert(len(contents["classes"]) == 12)
 assert(contents["classes"][0]["class name"] == "Warrior")
-assert(contents["classes"][0]["power type"] == "rage")
 
 # Testing a GET on /class/Warrior
 print("   Testing '/class/<className>' path...")

@@ -124,9 +124,6 @@ for eachClass in results['classes']:
    elif className == 'Rogue' or className == 'Warlock' or className == 'Mage' or className == 'Hunter':
       db.addClass(eachClass['name'], eachClass['powerType'], "DPS")
    db.commit()
-print(db.getClasses())
-
-db.updateClass()
 
 
 ############## Query for WoW API Battlegroups ################
