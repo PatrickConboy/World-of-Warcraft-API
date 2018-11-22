@@ -1,4 +1,4 @@
-# This file will define our database structure and provide methods to 
+# This file will define our database structure and provide methods to
 # access our database
 
 # Sets up database
@@ -15,10 +15,10 @@ class Race(Base):
 
    name        = Column(String(20), nullable = False, primary_key = True)
    id          = Column(Integer, nullable = False, primary_key = True)
-   faction      = Column(String(10), nullable = False)
+   faction     = Column(String(10), nullable = False)
    description = Column(String(200))
 
-#    faction     = relationship("Faction", back_populates='race') 
+#    faction     = relationship("Faction", back_populates='race')
 #    classes = relationship("Class", back_populates='races')
 
    def __repr__(self):
@@ -28,7 +28,7 @@ class Race(Base):
 
 # Class for Factions. The two factions have a name and description.
 # Need to figure out how to implement relationship (foreign key) between Race and Faction classes
-# class Faction(Base): 
+# class Faction(Base):
    # TODO: Implement faction database class
    # TODO: Make sure to implement relationship with "faction" in the Race class above
 

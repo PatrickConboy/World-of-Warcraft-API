@@ -81,6 +81,6 @@ for eachClass in results['classes']:
 
 ############## Query for Wikipedia WoW Factions ################
 
-# TODO: Setup query for obtaining faction info from wikipedia 
+# TODO: Setup query for obtaining faction info from wikipedia
 # Use this link for how to do that and read the second answer that talks about the wikipedia Python library
 # https://stackoverflow.com/questions/4460921/extract-the-first-paragraph-from-a-wikipedia-article-python
