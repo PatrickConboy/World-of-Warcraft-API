@@ -18,8 +18,8 @@ class Race(Base):
    faction     = Column(String(10), nullable = False)
    description = Column(String(200)) ## TODO: Need to add in descriptions!
 
-#    faction     = relationship("Faction", back_populates='race')
-#    classes = relationship("Class", back_populates='races')
+   #faction = relationship("Faction", back_populates = "race")
+   #classes = relationship("Class", back_populates="races")
 
    def __repr__(self):
       return "<Race: {0} -- Faction: {1}>".format(self.name, self.faction)
@@ -27,11 +27,17 @@ class Race(Base):
 
 
 # Class for Factions. The two factions have a name and description.
-# Need to figure out how to implement relationship (foreign key) between Race and Faction classes
-# class Faction(Base):
-   # TODO: Implement faction database class
-   # TODO: Make sure to implement relationship with "faction" in the Race class above
+# Need to figure out how to implement relationship (foreign key) between Race and Faction classes 
+class Faction(Base):
+   __tablename__ = 'factions'
 
+   name        = Column(String(20), nullable = False, primary_key = True)
+   description = Column(String(200))
+   #race = relationship("Race", back_populates = "faction")
+
+
+   def __repr__(self):
+      return "<Faction: {0}>".format(self.name)
 
 
 class Class(Base):
@@ -41,12 +47,19 @@ class Class(Base):
    powerType = Column(String(20), nullable = False)
    roles     = Column(String(50))
    #description TODO: implement this
-
-#    races = relationship("Race", back_populates='classes')
+   #races = relationship("Race", back_populates="classes")
 
    def __repr__(self):
       return "<Class Name: {0} - Power Type: {1} - Roles: {2}>".format(self.name, self.powerType, self.roles)
 
+
+class Battlegroup(Base):
+   __tablename__ = 'battlegroups'
+
+   name = Column(String(20), nullable = False, primary_key = True)
+
+   def __repr__(self):
+      return "<Battlegroup Name: {0}>".format(self.name)
 
 # Represents the database and our interaction with it
 class Db:
@@ -109,5 +122,28 @@ class Db:
       return newClass
 
 
+   ########## METHODS FOR CLASS BATTLEGROUP ###########
+
+   # This methods returns the list of battlegroups in WoW
+   def getBattlegroups(self):
+      return self.session.query(Battlegroup).all()
+
+   # This method allows us to add a battlegroup to our database
+   def addBattlegroup(self, name):
+      newbg = Battlegroup(name=name)
+      self.session.add(newbg)
+      return newbg
+
+
    ########## METHODS FOR FACTION CLASS ###########
-   # TODO: Implement add and get methods for faction
+
+   # This method returns the list of factions in WoW
+   def getFactions(self):
+      return self.session.query(Faction).all()
+
+   # This method returns information on one of the two factions
+   # User gives name of which faction they want to learn about
+   def getFaction(self, name):
+      return self.session.query(Faction)\
+                 .filter_by(name=name)\
+                 .one_or_none()

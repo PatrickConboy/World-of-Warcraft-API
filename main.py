@@ -89,9 +89,54 @@ def class_info(className):
       "link": url_for('class_info', className=givenClass.name)
    })
 
+
+# TODO: Setup @app.route for /battlegroup
+@app.route('/battlegroup', methods = ['GET'])
+def battlegroup_list():
+   battlegroups = db.getBattlegroups()
+   return make_json_response({
+      "battlegroups": [
+         {
+            "battlegroup name": bg.name
+         }
+         for bg in battlegroups
+      ]
+   })
+
+
+
 # TODO: Setup @app.route for /faction and /faction/factionName
 
-# TODO: Possibly implement extra routes for something like /race/raceName/class
+#@app.route('/faction', methods = ['GET'])
+#def faction_list():
+   #factions = db.getFactions()
+   #return make_json_response({
+      #"factions": [
+         #{
+            #"name": faction.name,
+            #"description": factions.description,
+            #"link": url_for('faction_info', factionName=faction.name)
+         #}
+         #for faction in factions
+      #]
+   #})
+
+#@app.route('/faction/<factionName>', methods = ['GET'])
+#def faction_info(factionName):
+   #if factionName is None:
+      #abort(404, 'must provide faction name')
+   #faction = db.getFaction(factionName)
+   #if faction is None:
+       #abort(404, 'unknown faction name')
+   #return make_json_response({
+      #"name": faction.name,
+      #"description": faction.description,
+      #"link": url_for('faction_info', factionName=faction.name)
+   #})
+
+
+
+# TODO: Possibly implement extra routes for something like /race/raceName/class 
 # This would let you see what classes are playable for that specific race
 # Might need to implement a few extra routes like this
 

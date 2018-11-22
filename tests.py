@@ -11,6 +11,9 @@ assert(len(db.getRaces()) == 21)
 print("   Testing Class methods...")
 assert(len(db.getClasses()) == 12)
 
+print("   Testing Battlegroup methods...")
+assert(len(db.getBattlegroups()) == 9)
+
 # TODO: Add more in depth DB tests
 
 print("###############  DB TESTS DONE ##################")
@@ -31,6 +34,9 @@ r = client.get('/race')
 assert(r.status_code == 200)
 contents = get_json(r)
 assert("races" in contents)
+assert(len(contents["races"]) == 21)
+assert(contents["races"][0]["name"] == "Human")
+assert(contents["races"][0]["faction"] == "alliance")
 
 # Testing a GET on /race/Human
 print("   Testing '/race/<raceName>' path...")
@@ -51,12 +57,15 @@ assert(contents['faction'] == 'horde')
 
 # Testing a GET on /class
 print("   Testing '/class' path...") 
+r = client.get('/class' + 'wah')
+assert(r.status_code == 404)
 r = client.get('/class')
 assert(r.status_code == 200)
 contents = get_json(r)
 assert("classes" in contents)
-r = client.get('/class' + 'wah')
-assert(r.status_code == 404)
+assert(len(contents["classes"]) == 12)
+assert(contents["classes"][0]["class name"] == "Warrior")
+assert(contents["classes"][0]["power type"] == "rage")
 
 # Testing a GET on /class/Warrior
 print("   Testing '/class/<className>' path...")
@@ -72,6 +81,15 @@ contents = get_json(r)
 assert(contents['class name'] == 'Death Knight')
 assert(contents['link'] == '/class/Death%20Knight')
 assert(contents['power type'] == 'runic-power')
+
+# Testing a GET on /battlegroup
+print("   Testing '/battlegroup' path...")
+r = client.get('/battlegroup')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert("battlegroups" in contents)
+assert(len(contents["battlegroups"]) == 9)
+
 
 # TODO: Add API tests for any new methods we implement
 
