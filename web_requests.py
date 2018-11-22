@@ -99,20 +99,14 @@ for race in results['races']:
 
 ############## Query for WoW API Classes ################
 
-# Particular page requested. The specific query string will be
-# appended to that.
+# Explanation of what these individual lines are doing is the
+# same as the above query above for WoW API Races
 page = 'data/character/classes?locale=en_US&access_token=USma7h4s9q8efPJyQpwfTlj5t5ogbi0NaD'
-
-# This just combines our base_url and page into our request_url
 req_url = base_url + page
-
-# We perform a request. Contains standard HTTP information
 response = oauth.get(req_url)
-
-# Read the query results
 results = json.loads(response.content.decode('utf-8'))
 
-# Puts each class into our database
+# Puts each class from our query into our database
 for eachClass in results['classes']:
    className = eachClass['name']
    if className == 'Warrior' or className == 'Death Knight' or className == 'Demon Hunter':
@@ -127,46 +121,15 @@ for eachClass in results['classes']:
 
 
 ############## Query for WoW API Battlegroups ################
+
+# Explanation of what these individual lines are doing is the
+# same as the above query above for WoW API Races
 page = 'data/battlegroups/?locale=en_US&access_token=USZbPYtne1FhueFiwAR7PKRHU8ODXtGwTq'
 req_url = base_url + page
 response = oauth.get(req_url)
 results = json.loads(response.content.decode('utf-8'))
+
+# Puts each battlegroup name from our query results into our database
 for bg in results['battlegroups']:
 	db.addBattlegroup(bg['name'])
 	db.commit()
-
-
-############## Query for Wikipedia WoW Factions ################
-
-# TODO: Setup query for obtaining faction info from wikipedia
-# Use this link for how to do that and read the second answer that talks about the wikipedia Python library
-# https://stackoverflow.com/questions/4460921/extract-the-first-paragraph-from-a-wikipedia-article-python
-
-
-
-
-
-
-
-# ## Programming Languages in Wikipedia
-# import requests, json, re
-# from pprint import pprint
-# from bs4 import BeautifulSoup
-
-# # The following function takes as input a full URL.
-# # It returns a BeautifulSoup object representing that web page's contents
-# # If the page does not exist, it returns None
-# def getPage(url):
-#    req = requests.get(url)
-#    if (req.status_code != 200):
-#       return None
-#    return BeautifulSoup(req.content, 'html.parser')
-
-# ## You will need to add this to the relative links you may encounter
-# baseUrl = "https://wow.gamepedia.com"
-
-# ## This page contains a list of all programming languages that have Wikipedia pages
-# listPage = getPage("http://wowwiki.wikia.com/wiki/Alliance")
-# listPage.head
-# # print(listPage.head)
-# print(listPage.find_all('p'))

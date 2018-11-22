@@ -18,41 +18,33 @@ class Race(Base):
    faction     = Column(String(10), nullable = False)
    description = Column(String(500))
 
-   #faction = relationship("Faction", back_populates = "race")
-   #classes = relationship("Class", back_populates="races")
-
    def __repr__(self):
       return "<Race: {0}>".format(self.name)
 
 
 
 # Class for Factions. The two factions have a name and description.
-# Need to figure out how to implement relationship (foreign key) between Race and Faction classes 
 class Faction(Base):
    __tablename__ = 'factions'
 
    name        = Column(String(20), nullable = False, primary_key = True)
    description = Column(String(200))
-   #race = relationship("Race", back_populates = "faction")
-
 
    def __repr__(self):
       return "<Faction: {0}>".format(self.name)
 
-
+# Class for Class. Each class has a name, power type, and roles available to that class.
 class Class(Base):
    __tablename__ = 'classes'
 
    name      = Column(String(20), nullable = False, primary_key = True)
    powerType = Column(String(20), nullable = False)
    roles     = Column(String(50))
-   #description TODO: implement this
-   #races = relationship("Race", back_populates="classes")
 
    def __repr__(self):
       return "<Class Name: {0} - Power Type: {1} - Roles: {2}>".format(self.name, self.powerType, self.roles)
 
-
+# Class for Battlegroup. Each battlegroup has a name. 
 class Battlegroup(Base):
    __tablename__ = 'battlegroups'
 
