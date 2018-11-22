@@ -1,4 +1,4 @@
-# This file will define our database structure and provide methods to 
+# This file will define our database structure and provide methods to
 # access our database
 
 # Sets up database
