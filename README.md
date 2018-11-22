@@ -25,3 +25,10 @@
 
 /role -- TODO: this path returns list of playable roles in the game
 /role/<roleName> -- TODO: this path returns info on a specific role
+
+TODO: We should try to implement some relationships/foreign_keys for some of this. Need to 
+      figure out where we can use those in our database.
+
+Ideas: Pull PVP leaderboard and aggregate some statistics on top ranked pvp players. For instance, list the top 10 servers and the percentage of players from the top 100 players on each server.
+
+Notes: Doesn't seem like we can programmatically match races to the classes available for them. We are probably going to need to hard code in some of this data if we want to include it (we do).
