@@ -69,7 +69,6 @@ def class_list():
       "classes": [
          {
             "class name": eachClass.name,
-            "power type": eachClass.powerType,
             "link": url_for('class_info', className=eachClass.name)
          }
          for eachClass in classes
@@ -86,12 +85,13 @@ def class_info(className):
    return make_json_response({
       "class name": givenClass.name,
       "power type": givenClass.powerType,
+      "roles": givenClass.roles,
       "link": url_for('class_info', className=givenClass.name)
    })
 
 # TODO: Setup @app.route for /faction and /faction/factionName
 
-# TODO: Possibly implement extra routes for something like /race/raceName/class 
+# TODO: Possibly implement extra routes for something like /race/raceName/class
 # This would let you see what classes are playable for that specific race
 # Might need to implement a few extra routes like this
 
