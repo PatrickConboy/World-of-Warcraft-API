@@ -16,19 +16,27 @@
 /race/<raceName>/class -- TODO: this path returns playable classes for a given race (low priority)
 
 /class -- done: this path returns a list of playable classes
-/class/<className> -- WIP: this path returns information on a given class. ADD INFO ON DPS/HEALER/TANK
+/class/<className> -- WIP: this path returns information on a given class.
 
-/faction -- TODO: this path returns both faction names
+/faction -- done: this path returns both faction names
 /faction/<factionName> -- TODO: this returns a brief summary on a specific faction
-/faction/<factionName>/race -- TODO: this returns a list of playable races for a given faction
 
 /role -- TODO: this path returns list of playable roles in the game
 /role/<roleName> -- TODO: this path returns info on a specific role (Name, description)
 
 /arenaStats -- TODO: Returns some statistics on the 3v3 pvp leaderboard
+/battlegroups -- done: Returns list of all the battlegroups
 
 TODO: We should try to implement some relationships/foreign_keys for some of this. Need to
       figure out where we can use those in our database.
+
+      Add tests new roles in class implementation.
+
+      Add descriptions for races
+
+      Add description for factions
+
+      Add description for classes???
 
 Ideas: Pull PVP leaderboard and aggregate some statistics on top ranked PVP players. For instance, list the top 10 servers and the percentage of players from the top 100 players on each server.
 
