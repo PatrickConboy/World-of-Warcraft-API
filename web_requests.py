@@ -102,25 +102,25 @@ for bg in results['battlegroups']:
 
 
 
-## Programming Languages in Wikipedia
-import requests, json, re
-from pprint import pprint
-from bs4 import BeautifulSoup
+# ## Programming Languages in Wikipedia
+# import requests, json, re
+# from pprint import pprint
+# from bs4 import BeautifulSoup
 
-# The following function takes as input a full URL.
-# It returns a BeautifulSoup object representing that web page's contents
-# If the page does not exist, it returns None
-def getPage(url):
-   req = requests.get(url)
-   if (req.status_code != 200):
-      return None
-   return BeautifulSoup(req.content, 'html.parser')
+# # The following function takes as input a full URL.
+# # It returns a BeautifulSoup object representing that web page's contents
+# # If the page does not exist, it returns None
+# def getPage(url):
+#    req = requests.get(url)
+#    if (req.status_code != 200):
+#       return None
+#    return BeautifulSoup(req.content, 'html.parser')
 
-## You will need to add this to the relative links you may encounter
-baseUrl = "https://wow.gamepedia.com"
+# ## You will need to add this to the relative links you may encounter
+# baseUrl = "https://wow.gamepedia.com"
 
-## This page contains a list of all programming languages that have Wikipedia pages
-listPage = getPage("http://wowwiki.wikia.com/wiki/Alliance")
-listPage.head
-# print(listPage.head)
-print(listPage.find_all('p'))
+# ## This page contains a list of all programming languages that have Wikipedia pages
+# listPage = getPage("http://wowwiki.wikia.com/wiki/Alliance")
+# listPage.head
+# # print(listPage.head)
+# print(listPage.find_all('p'))
