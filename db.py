@@ -47,6 +47,7 @@ class Class(Base):
    powerType = Column(String(20), nullable = False)
    roles     = Column(String(50))
    #description TODO: implement this
+   #races = relationship("Race", back_populates="classes")
 
    def __repr__(self):
       return "<Class Name: {0} - Power Type: {1} - Roles: {2}>".format(self.name, self.powerType, self.roles)
