@@ -12,6 +12,7 @@
 
 /race -- this path returns the list of playable races
 /race/<raceName> -- this path returns information on a specific race
+/race/<raceName>/description -- this path returns a brief description of who the race is
 /race/<raceName>/class -- TODO: this path returns playable classes for a given race
 
 /class -- done: this path returns a list of playable classes
