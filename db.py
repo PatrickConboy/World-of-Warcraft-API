@@ -45,10 +45,11 @@ class Class(Base):
 
    name      = Column(String(20), nullable = False, primary_key = True)
    powerType = Column(String(20), nullable = False)
-   #races = relationship("Race", back_populates="classes")
+   roles     = Column(String(50))
+   #description TODO: implement this
 
    def __repr__(self):
-      return "<Class Name: {0} -- Power Type: {1}>".format(self.name, self.powerType)
+      return "<Class Name: {0} - Power Type: {1} - Roles: {2}>".format(self.name, self.powerType, self.roles)
 
 
 class Battlegroup(Base):
@@ -114,8 +115,8 @@ class Db:
 
    # This method adds a new class to our database when given a className and powerType
    # Returns the Class object that got added
-   def addClass(self, name, powerType):
-      newClass = Class(name=name, powerType=powerType)
+   def addClass(self, name, powerType, roles):
+      newClass = Class(name=name, powerType=powerType, roles=roles)
       self.session.add(newClass)
       return newClass
 

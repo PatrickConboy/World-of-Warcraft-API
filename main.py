@@ -77,7 +77,6 @@ def class_list():
       "classes": [
          {
             "class name": eachClass.name,
-            "power type": eachClass.powerType,
             "link": url_for('class_info', className=eachClass.name)
          }
          for eachClass in classes
@@ -94,6 +93,7 @@ def class_info(className):
    return make_json_response({
       "class name": givenClass.name,
       "power type": givenClass.powerType,
+      "roles": givenClass.roles,
       "link": url_for('class_info', className=givenClass.name)
    })
 
