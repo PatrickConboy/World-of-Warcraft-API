@@ -1,4 +1,7 @@
- # Sets up database
+# This file will define our database structure and provide methods to 
+# access our database
+
+# Sets up database
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
@@ -12,20 +15,24 @@ class Race(Base):
 
    name        = Column(String(20), nullable = False, primary_key = True)
    id          = Column(Integer, nullable = False, primary_key = True)
-   # faction      = Column(String(10), nullable = False)
+   faction      = Column(String(10), nullable = False)
    description = Column(String(200))
 
-   faction     = relationship("Faction", back_populates='race') 
+#    faction     = relationship("Faction", back_populates='race') 
+#    classes = relationship("Class", back_populates='races')
 
    def __repr__(self):
       return "<Race: {0} -- Faction: {1}>".format(self.name, self.faction)
 
 
 
+# Class for Factions. The two factions have a name and description.
+# Need to figure out how to implement relationship (foreign key) between Race and Faction classes
+# class Faction(Base): 
+   # TODO: Implement faction database class
+   # TODO: Make sure to implement relationship with "faction" in the Race class above
 
-# class Faction(Base):
-#    pass
-#    # TODO: Implement faction database class
+
 
 class Class(Base):
    __tablename__ = 'classes'
@@ -33,15 +40,10 @@ class Class(Base):
    name      = Column(String(20), nullable = False, primary_key = True)
    powerType = Column(String(20), nullable = False)
 
+#    races = relationship("Race", back_populates='classes')
+
    def __repr__(self):
       return "<Class Name: {0} -- Power Type: {1}>".format(self.name, self.powerType)
-
-# class Class(Base):
-#    __tablename__ = 'classes'
-   
-
-
-
 
 
 # Represents the database and our interaction with it
