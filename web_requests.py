@@ -84,3 +84,32 @@ for eachClass in results['classes']:
 # TODO: Setup query for obtaining faction info from wikipedia 
 # Use this link for how to do that and read the second answer that talks about the wikipedia Python library
 # https://stackoverflow.com/questions/4460921/extract-the-first-paragraph-from-a-wikipedia-article-python
+
+
+
+
+
+
+
+## Programming Languages in Wikipedia
+import requests, json, re
+from pprint import pprint
+from bs4 import BeautifulSoup
+
+# The following function takes as input a full URL.
+# It returns a BeautifulSoup object representing that web page's contents
+# If the page does not exist, it returns None
+def getPage(url):
+   req = requests.get(url)
+   if (req.status_code != 200):
+      return None
+   return BeautifulSoup(req.content, 'html.parser')
+
+## You will need to add this to the relative links you may encounter
+baseUrl = "https://wow.gamepedia.com"
+
+## This page contains a list of all programming languages that have Wikipedia pages
+listPage = getPage("http://wowwiki.wikia.com/wiki/Alliance")
+listPage.head
+# print(listPage.head)
+print(listPage.find_all('p'))
