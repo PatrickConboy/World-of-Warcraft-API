@@ -36,7 +36,6 @@ contents = get_json(r)
 assert("races" in contents)
 assert(len(contents["races"]) == 21)
 assert(contents["races"][0]["name"] == "Human")
-assert(contents["races"][0]["faction"] == "alliance")
 
 # Testing a GET on /race/Human
 print("   Testing '/race/<raceName>' path...")

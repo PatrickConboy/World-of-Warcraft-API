@@ -10,8 +10,8 @@
 
 / -- TODO: this path will return a list of possible API paths
 
-/race -- done: this path returns the list of playable races
-/race/<raceName> -- done: this path returns information on a specific race
+/race -- this path returns the list of playable races
+/race/<raceName> -- this path returns information on a specific race
 /race/<raceName>/class -- TODO: this path returns playable classes for a given race
 
 /class -- done: this path returns a list of playable classes

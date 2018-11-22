@@ -37,8 +37,6 @@ def race_list():
       "races": [
          {
             "name": race.name,
-            "faction": race.faction,
-            "description": race.description,
             "link": url_for('race_info', raceName=race.name)
          }
          for race in races
