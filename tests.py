@@ -6,7 +6,7 @@ session = db.session
 print("###############    DB TESTS    ##################")
 # Testing to see if our data is in the data base and db methods work
 print("   Testing Race methods...")
-assert(len(db.getRaces()) == 21)
+assert(len(db.getRaces()) == 19)
 
 print("   Testing Class methods...")
 assert(len(db.getClasses()) == 12)
@@ -35,7 +35,7 @@ r = client.get('/race')
 assert(r.status_code == 200)
 contents = get_json(r)
 assert("races" in contents)
-assert(len(contents["races"]) == 21)
+assert(len(contents["races"]) == 19)
 assert(contents["races"][0]["name"] == "Human")
 
 # Testing a GET on /race/Human
@@ -61,6 +61,11 @@ r = client.get(base_url + '/race/Human/description')
 contents = get_json(r)
 assert('description' in contents)
 assert(contents['description'] == "Recent discoveries have shown that humans are descended from the barbaric vrykul, half-giant warriors who live in Northrend. Early humans were primarily a scattered and tribal people for several millennia, until the rising strength of the troll empire forced their strategic unification. Thus the nation of Arathor was formed, along with its capital, the city-state of Strom.")
+
+r = client.get(base_url + '/race/Highmountain%20Tauren/description')
+contents = get_json(r)
+assert('description' in contents)
+assert(contents['description'] == "Descended from Huln, brave hero of the War of the Ancients, the Highmountain tauren honor the spirits of earth, river, and sky. Though the Legion invaded their lands and sowed seeds of distrust between them, the tribes of Highmountain stand united once more. At long last they are ready to venture beyond their sacred mountain and stand beside their kin from Kalimdor, lending their nobility and strength to the mighty Horde.")
 
 
 # Testing a GET on /class
