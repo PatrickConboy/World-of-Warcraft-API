@@ -19,7 +19,7 @@
 /class/<className> -- WIP: this path returns information on a given class.
 
 /faction -- done: this path returns both faction names
-/faction/<factionName> -- TODO: this returns a brief summary on a specific faction
+/faction/<factionName> -- this returns a brief summary on a specific faction
 
 /role -- TODO: this path returns list of playable roles in the game
 /role/<roleName> -- TODO: this path returns info on a specific role (Name, description)
@@ -32,12 +32,10 @@ TODO: We should try to implement some relationships/foreign_keys for some of thi
 
       Add tests new roles in class implementation.
 
-      Add descriptions for races
-
-      Add description for factions
-
       Add description for classes???
 
-Ideas: Pull PVP leaderboard and aggregate some statistics on top ranked PVP players. For instance, list the top 10 servers and the percentage of players from the top 100 players on each server.
+      Add tests for error codes in tests
 
-Notes: Doesn't seem like we can programmatically match races to the classes available for them. We are probably going to need to hard code in some of this data if we want to include it (we do).
+      Add tests that should fail for every block of testing. Not just 200 code tests
+
+Ideas: Pull PVP leaderboard and aggregate some statistics on top ranked PVP players. For instance, list the top 10 servers and the percentage of players from the top 100 players on each server.
