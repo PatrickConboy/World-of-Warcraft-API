@@ -91,24 +91,6 @@ def class_info(className):
       "link": url_for('class_info', className=givenClass.name)
    })
 
-
-# TODO: Setup @app.route for /battlegroup
-@app.route('/battlegroup', methods = ['GET'])
-def battlegroup_list():
-   battlegroups = db.getBattlegroups()
-   return make_json_response({
-      "battlegroups": [
-         {
-            "battlegroup name": bg.name
-         }
-         for bg in battlegroups
-      ]
-   })
-
-
-
-# TODO: Setup @app.route for /faction and /faction/factionName
-
 @app.route('/faction', methods = ['GET'])
 def faction_list():
    factions = db.getFactions()
@@ -133,11 +115,17 @@ def faction_info(factionName):
       "link": url_for('faction_info', factionName=faction.name)
    })
 
-
-
-# TODO: Possibly implement extra routes for something like /race/raceName/class 
-# This would let you see what classes are playable for that specific race
-# Might need to implement a few extra routes like this
+@app.route('/battlegroup', methods = ['GET'])
+def battlegroup_list():
+   battlegroups = db.getBattlegroups()
+   return make_json_response({
+      "battlegroups": [
+         {
+            "battlegroup name": bg.name
+         }
+         for bg in battlegroups
+      ]
+   })
 
 
 ## HELPER METHODS
@@ -146,7 +134,6 @@ def faction_info(factionName):
 def make_json_response(content, response = 200, headers = {}):
    headers['Content-Type'] = 'application/json'
    return make_response(json.dumps(content), response, headers)
-
 
 # Starts the application
 if __name__ == "__main__":

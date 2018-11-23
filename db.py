@@ -21,7 +21,16 @@ class Race(Base):
    def __repr__(self):
       return "<Race: {0}>".format(self.name)
 
+# Class for Class. Each class has a name, power type, and roles available to that class.
+class Class(Base):
+   __tablename__ = 'classes'
 
+   name      = Column(String(20), nullable = False, primary_key = True)
+   powerType = Column(String(20), nullable = False)
+   roles     = Column(String(50))
+
+   def __repr__(self):
+      return "<Class Name: {0}>".format(self.name, self.powerType, self.roles)
 
 # Class for Factions. The two factions have a name and description.
 class Faction(Base):
@@ -32,17 +41,6 @@ class Faction(Base):
 
    def __repr__(self):
       return "<Faction: {0}>".format(self.name)
-
-# Class for Class. Each class has a name, power type, and roles available to that class.
-class Class(Base):
-   __tablename__ = 'classes'
-
-   name      = Column(String(20), nullable = False, primary_key = True)
-   powerType = Column(String(20), nullable = False)
-   roles     = Column(String(50))
-
-   def __repr__(self):
-      return "<Class Name: {0} - Power Type: {1} - Roles: {2}>".format(self.name, self.powerType, self.roles)
 
 # Class for Battlegroup. Each battlegroup has a name. 
 class Battlegroup(Base):
@@ -114,19 +112,6 @@ class Db:
       return newClass
 
 
-   ########## METHODS FOR CLASS BATTLEGROUP ###########
-
-   # This methods returns the list of battlegroups in WoW
-   def getBattlegroups(self):
-      return self.session.query(Battlegroup).all()
-
-   # This method allows us to add a battlegroup to our database
-   def addBattlegroup(self, name):
-      newbg = Battlegroup(name=name)
-      self.session.add(newbg)
-      return newbg
-
-
    ########## METHODS FOR FACTION CLASS ###########
 
    # This method returns the list of factions in WoW
@@ -140,7 +125,22 @@ class Db:
                  .filter_by(name=name)\
                  .one_or_none()
 
+   # This method adds a new faction to the database with the given name 
+   # and description, then returns the new faction that was created
    def addFaction(self, name, description):
       newFaction = Faction(name=name, description=description)
       self.session.add(newFaction)
       return newFaction
+
+
+   ########## METHODS FOR CLASS BATTLEGROUP ###########
+
+   # This methods returns the list of battlegroups in WoW
+   def getBattlegroups(self):
+      return self.session.query(Battlegroup).all()
+
+   # This method allows us to add a battlegroup to our database
+   def addBattlegroup(self, name):
+      newbg = Battlegroup(name=name)
+      self.session.add(newbg)
+      return newbg
