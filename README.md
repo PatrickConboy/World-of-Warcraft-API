@@ -15,10 +15,10 @@
 /race/<raceName>/description -- this path returns a description of the race
 /race/<raceName>/class -- TODO: this path returns playable classes for a given race (low priority)
 
-/class -- done: this path returns a list of playable classes
-/class/<className> -- WIP: this path returns information on a given class.
+/class -- this path returns a list of playable classes
+/class/<className> -- this path returns information on a given class.
 
-/faction -- done: this path returns both faction names
+/faction -- this path returns both faction names
 /faction/<factionName> -- this returns a brief summary on a specific faction
 
 /role -- TODO: this path returns list of playable roles in the game
@@ -32,10 +32,12 @@ TODO: We should try to implement some relationships/foreign_keys for some of thi
 
       Add tests new roles in class implementation.
 
-      Add description for classes???
+      Add description for classes
 
       Add tests for error codes in tests
 
       Add tests that should fail for every block of testing. Not just 200 code tests
+
+      Fix issue where when making call for something like /class/Death Knight you have to put a %20 inbetween Death and Knight
 
 Ideas: Pull PVP leaderboard and aggregate some statistics on top ranked PVP players. For instance, list the top 10 servers and the percentage of players from the top 100 players on each server.
