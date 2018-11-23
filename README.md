@@ -8,12 +8,12 @@
                             
                     API Paths
 
-/ -- TODO: this path will return a list of possible API paths
+/ -- TODO: this path will return a list of possible API paths (low priority)
 
 /race -- this path returns the list of playable races
 /race/<raceName> -- this path returns information on a specific race
-/race/<raceName>/description -- this path returns a brief description of who the race is
-/race/<raceName>/class -- TODO: this path returns playable classes for a given race
+/race/<raceName>/description -- this path returns a description of the race
+/race/<raceName>/class -- TODO: this path returns playable classes for a given race (low priority)
 
 /class -- done: this path returns a list of playable classes
 /class/<className> -- WIP: this path returns information on a given class. ADD INFO ON DPS/HEALER/TANK
@@ -25,6 +25,3 @@
 
 /role -- TODO: this path returns list of playable roles in the game
 /role/<roleName> -- TODO: this path returns info on a specific role
-
-TODO: We should try to implement some relationships/foreign_keys for some of this. Need to 
-      figure out where we can use those in our database.
