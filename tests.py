@@ -39,6 +39,7 @@ assert(contents["races"][0]["name"] == "Human")
 # Testing a GET on /race/Human
 print("   Testing '/race/<raceName>' path...")
 r = client.get(base_url + '/race/Human')
+assert(r.status_code == 200)
 contents = get_json(r)
 assert(contents['name'] == 'Human')
 assert(contents['link'] == '/race/Human')
@@ -46,6 +47,7 @@ assert(contents['faction'] == 'alliance')
 
 # Testing a GET on /race/Troll
 r = client.get(base_url + '/race/Troll')
+assert(r.status_code == 200)
 contents = get_json(r)
 assert(contents['name'] == 'Troll')
 assert(contents['link'] == '/race/Troll')
@@ -56,12 +58,14 @@ print("   Testing '/race/<raceName>/description' path...")
 r = client.get(base_url + '/race/Dog/description')
 assert(r.status_code == 404)
 r = client.get(base_url + '/race/Human/description')
+assert(r.status_code == 200)
 contents = get_json(r)
 assert('description' in contents)
 assert(contents['description'] == "Recent discoveries have shown that humans are descended from the barbaric vrykul, half-giant warriors who live in Northrend. Early humans were primarily a scattered and tribal people for several millennia, until the rising strength of the troll empire forced their strategic unification. Thus the nation of Arathor was formed, along with its capital, the city-state of Strom.")
 
 # Testing a GET on /race/Highmountain Tauren/description
 r = client.get(base_url + '/race/Highmountain%20Tauren/description')
+assert(r.status_code == 200)
 contents = get_json(r)
 assert('description' in contents)
 assert(contents['description'] == "Descended from Huln, brave hero of the War of the Ancients, the Highmountain tauren honor the spirits of earth, river, and sky. Though the Legion invaded their lands and sowed seeds of distrust between them, the tribes of Highmountain stand united once more. At long last they are ready to venture beyond their sacred mountain and stand beside their kin from Kalimdor, lending their nobility and strength to the mighty Horde.")
@@ -79,18 +83,26 @@ assert(contents["classes"][0]["class name"] == "Warrior")
 
 # Testing a GET on /class/Warrior
 print("   Testing '/class/<className>' path...")
+r = client.get(base_url + '/class/Warrior' + 'www')
+assert(r.status_code == 404)
 r = client.get(base_url + '/class/Warrior')
+assert(r.status_code == 200)
 contents = get_json(r)
 assert(contents['class name'] == 'Warrior')
 assert(contents['link'] == '/class/Warrior')
 assert(contents['power type'] == 'rage')
+assert(contents['roles'] == 'DPS, Tank')
 
-# Testing a GET on /class/Death Knight
-r = client.get(base_url + '/class/Death Knight')
+# Testing a GET on /class/Druid
+r = client.get(base_url + '/class/LeeroyJenkins')
+assert(r.status_code == 404)
+r = client.get(base_url + '/class/Druid')
+assert(r.status_code == 200)
 contents = get_json(r)
-assert(contents['class name'] == 'Death Knight')
-assert(contents['link'] == '/class/Death%20Knight')
-assert(contents['power type'] == 'runic-power')
+assert(contents['class name'] == 'Druid')
+assert(contents['link'] == '/class/Druid')
+assert(contents['power type'] == 'mana')
+assert(contents['roles'] == 'DPS, Tank, Healer')
 
 # Testing a GET on /faction
 print("   Testing '/faction' path...")
@@ -128,15 +140,12 @@ assert(contents['description'] is not None)
 
 # Testing a GET on /battlegroup
 print("   Testing '/battlegroup' path...")
+r = client.get('/battlegroup' + 'fail')
+assert(r.status_code == 404)
 r = client.get('/battlegroup')
 assert(r.status_code == 200)
 contents = get_json(r)
 assert("battlegroups" in contents)
 assert(len(contents["battlegroups"]) == 9)
-
-
-# TODO: Add API tests for any new methods we implement
-
-# TODO: Add more in depth API tests
 
 print("############### API TESTS DONE ##################")

@@ -65,7 +65,6 @@ def race_description(raceName):
       "description": race.description
    })
 
-# TODO: Setup @app.route for /class and /className
 @app.route('/class', methods = ['GET'])
 def class_list():
    classes = db.getClasses()
