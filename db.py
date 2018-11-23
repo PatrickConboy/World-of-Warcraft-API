@@ -30,7 +30,7 @@ class Class(Base):
    roles     = Column(String(50))
 
    def __repr__(self):
-      return "<Class Name: {0}>".format(self.name, self.powerType, self.roles)
+      return "<Class Name: {0}>".format(self.name)
 
 # Class for Factions. The two factions have a name and description.
 class Faction(Base):
