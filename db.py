@@ -42,7 +42,7 @@ class Faction(Base):
    def __repr__(self):
       return "<Faction: {0}>".format(self.name)
 
-# Class for Battlegroup. Each battlegroup has a name. 
+# Class for Battlegroup. Each battlegroup has a name.
 class Battlegroup(Base):
    __tablename__ = 'battlegroups'
 
@@ -50,6 +50,15 @@ class Battlegroup(Base):
 
    def __repr__(self):
       return "<Battlegroup Name: {0}>".format(self.name)
+
+class ArenaStat(Base):
+   __tablename__ = 'arena_stats'
+
+   name      = Column(String(40), nullable = False, primary_key = True)
+   statistic = Column(Float, nullable = False)
+
+   def __repr__(self):
+      return "<Stat Name: {0} -- Stat: {1}>".format(self.name, self.statistic)
 
 # Represents the database and our interaction with it
 class Db:
@@ -125,7 +134,7 @@ class Db:
                  .filter_by(name=name)\
                  .one_or_none()
 
-   # This method adds a new faction to the database with the given name 
+   # This method adds a new faction to the database with the given name
    # and description, then returns the new faction that was created
    def addFaction(self, name, description):
       newFaction = Faction(name=name, description=description)
@@ -144,3 +153,19 @@ class Db:
       newbg = Battlegroup(name=name)
       self.session.add(newbg)
       return newbg
+
+   # This method returns the list of all arena stats in our database
+   def getArenaStats(self):
+      return self.session.query(ArenaStat).all()
+
+   # This method returns a specific statistic when given a name of a stat
+   def getArenaStat(self, name):
+      return self.session.query(ArenaStat)\
+                 .filter_by(name=name)\
+                 .one_or_none()
+
+   # This method adds a new arena stat to our database
+   def addArenaStat(self, name, stat):
+      newStat = ArenaStat(name=name, statistic=stat)
+      self.session.add(newStat)
+      return newStat
