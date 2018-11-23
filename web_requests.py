@@ -143,3 +143,25 @@ results = json.loads(response.content.decode('utf-8'))
 for bg in results['battlegroups']:
 	db.addBattlegroup(bg['name'])
 db.commit()
+
+
+############## Query for WoW API 3v3 Arenas ################
+page = 'leaderboard/3v3?locale=en_US&access_token=USZbPYtne1FhueFiwAR7PKRHU8ODXtGwTq'
+req_url = base_url + page
+response = oauth.get(req_url)
+results = json.loads(response.content.decode('utf-8'))
+
+# Puts each battlegroup name from our query results into our database
+print(len(results['rows']))
+gladiators = [player['name'] for player in results['rows'] if player['tier'] == 'Gladiator']
+
+duelists    = [player['name'] for player in results['rows'] if player['tier'] == 'Duelist']
+
+rivals      = [player['name'] for player in results['rows'] if player['tier'] == 'Rival']
+
+challengers = [player['name'] for player in results['rows'] if player['tier'] == 'Challenger']
+
+print(len(gladiators))
+print(len(duelists))
+print(len(rivals))
+print(len(challengers))
