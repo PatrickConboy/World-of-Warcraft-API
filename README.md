@@ -34,10 +34,4 @@ TODO: We should try to implement some relationships/foreign_keys for some of thi
 
       Add description for classes
 
-      Add tests for error codes in tests
-
-      Add tests that should fail for every block of testing. Not just 200 code tests
-
-      Fix issue where when making call for something like /class/Death Knight you have to put a %20 inbetween Death and Knight
-
 Ideas: Pull PVP leaderboard and aggregate some statistics on top ranked PVP players. For instance, list the top 10 servers and the percentage of players from the top 100 players on each server.
