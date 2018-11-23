@@ -47,8 +47,6 @@ def race_list():
 # pass in a race name
 @app.route('/race/<raceName>', methods = ['GET'])
 def race_info(raceName):
-   if raceName is None:
-      abort(404, 'must provide race name')
    race = db.getRace(raceName)
    if race is None:
        abort(404, 'unknown race name')
@@ -60,8 +58,6 @@ def race_info(raceName):
 
 @app.route('/race/<raceName>/description', methods = ['GET'])
 def race_description(raceName):
-   if raceName is None:
-      abort(404, 'must provide race name')
    race = db.getRace(raceName)
    if race is None:
        abort(404, 'unknown race name')
@@ -85,8 +81,6 @@ def class_list():
 
 @app.route('/class/<className>', methods = ['GET'])
 def class_info(className):
-   if className is None:
-      abort(404, 'must provide class name')
    givenClass = db.getClass(className)
    if givenClass is None:
        abort(404, 'unknown class name')
@@ -115,32 +109,29 @@ def battlegroup_list():
 
 # TODO: Setup @app.route for /faction and /faction/factionName
 
-#@app.route('/faction', methods = ['GET'])
-#def faction_list():
-   #factions = db.getFactions()
-   #return make_json_response({
-      #"factions": [
-         #{
-            #"name": faction.name,
-            #"description": factions.description,
-            #"link": url_for('faction_info', factionName=faction.name)
-         #}
-         #for faction in factions
-      #]
-   #})
+@app.route('/faction', methods = ['GET'])
+def faction_list():
+   factions = db.getFactions()
+   return make_json_response({
+      "factions": [
+         {
+            "name": faction.name,
+            "link": url_for('faction_info', factionName=faction.name)
+         }
+         for faction in factions
+      ]
+   })
 
-#@app.route('/faction/<factionName>', methods = ['GET'])
-#def faction_info(factionName):
-   #if factionName is None:
-      #abort(404, 'must provide faction name')
-   #faction = db.getFaction(factionName)
-   #if faction is None:
-       #abort(404, 'unknown faction name')
-   #return make_json_response({
-      #"name": faction.name,
-      #"description": faction.description,
-      #"link": url_for('faction_info', factionName=faction.name)
-   #})
+@app.route('/faction/<factionName>', methods = ['GET'])
+def faction_info(factionName):
+   faction = db.getFaction(factionName)
+   if faction is None:
+       abort(404, 'unknown faction name')
+   return make_json_response({
+      "name": faction.name,
+      "description": faction.description,
+      "link": url_for('faction_info', factionName=faction.name)
+   })
 
 
 

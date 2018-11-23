@@ -14,8 +14,6 @@ assert(len(db.getClasses()) == 12)
 print("   Testing Battlegroup methods...")
 assert(len(db.getBattlegroups()) == 9)
 
-# TODO: Add more in depth DB tests
-
 print("###############  DB TESTS DONE ##################")
 
 print(" ")
@@ -62,6 +60,7 @@ contents = get_json(r)
 assert('description' in contents)
 assert(contents['description'] == "Recent discoveries have shown that humans are descended from the barbaric vrykul, half-giant warriors who live in Northrend. Early humans were primarily a scattered and tribal people for several millennia, until the rising strength of the troll empire forced their strategic unification. Thus the nation of Arathor was formed, along with its capital, the city-state of Strom.")
 
+# Testing a GET on /race/Highmountain Tauren/description
 r = client.get(base_url + '/race/Highmountain%20Tauren/description')
 contents = get_json(r)
 assert('description' in contents)
@@ -93,6 +92,40 @@ contents = get_json(r)
 assert(contents['class name'] == 'Death Knight')
 assert(contents['link'] == '/class/Death%20Knight')
 assert(contents['power type'] == 'runic-power')
+
+# Testing a GET on /faction
+print("   Testing '/faction' path...")
+r = client.get(base_url + '/faction/')
+assert(r.status_code == 200)
+r = client.get(base_url + '/faction')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert('factions' in contents)
+assert(contents['factions'][0]['name'] == 'Alliance')
+assert(contents['factions'][1]['name'] == 'Horde')
+
+# Testing a GET on /faction/Alliance
+print("   Testing '/faction/<factionName>' path...")
+r = client.get(base_url + '/faction/Alliance' + 'LeeroyJenkins')
+assert(r.status_code == 404)
+r = client.get(base_url + '/faction/Alliance')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert('name' in contents)
+assert(contents['name'] == "Alliance")
+assert('description' in contents)
+assert(contents['description'] is not None)
+
+# Testing a GET on /faction/Horde
+r = client.get(base_url + '/faction/Horde' + 'LeeroyJenkins')
+assert(r.status_code == 404)
+r = client.get(base_url + '/faction/Horde')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert('name' in contents)
+assert(contents['name'] == "Horde")
+assert('description' in contents)
+assert(contents['description'] is not None)
 
 # Testing a GET on /battlegroup
 print("   Testing '/battlegroup' path...")

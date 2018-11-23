@@ -28,7 +28,7 @@ class Faction(Base):
    __tablename__ = 'factions'
 
    name        = Column(String(20), nullable = False, primary_key = True)
-   description = Column(String(200))
+   description = Column(String(400))
 
    def __repr__(self):
       return "<Faction: {0}>".format(self.name)
@@ -139,3 +139,8 @@ class Db:
       return self.session.query(Faction)\
                  .filter_by(name=name)\
                  .one_or_none()
+
+   def addFaction(self, name, description):
+      newFaction = Faction(name=name, description=description)
+      self.session.add(newFaction)
+      return newFaction

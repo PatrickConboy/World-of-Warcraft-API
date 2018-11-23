@@ -95,7 +95,7 @@ for race in results['races']:
       db.addRace(race['name'], race['id'], race['side'], "For untold generations, the orc clans of Draenor battled one another in endless war. But when Gul'dan offered them the blood of his demonic masters, the disparate tribes of Mag'har—the orcish word for 'uncorrupted'—refused the dark bargain and banded together to drive out the Burning Legion. In the aftermath of the fall of Hellfire Citadel, the Mag'har pledged to one day repay Azeroth's heroes for aiding their cause. As war against the Alliance intensifies, the Horde must call upon the might of the Mag'har to seize victory.")
    elif raceName == 'Nightborne':
       db.addRace(race['name'], race['id'], race['side'], "Isolated behind a protective barrier for 10,000 years, the elves of Suramar grew increasingly dependent upon the arcane magic of the Nightwell. To protect this font of power, the leaders of the Nightborne struck a bargain with the Burning Legion that plunged their kingdom into civil war. After fighting for freedom from their demonic masters, the Nightborne seek allies in the Horde to help reclaim their place in the world.")
-   db.commit()
+db.commit()
 
 ############## Query for WoW API Classes ################
 
@@ -117,7 +117,7 @@ for eachClass in results['classes']:
       db.addClass(eachClass['name'], eachClass['powerType'], "DPS, Healer")
    elif className == 'Rogue' or className == 'Warlock' or className == 'Mage' or className == 'Hunter':
       db.addClass(eachClass['name'], eachClass['powerType'], "DPS")
-   db.commit()
+db.commit()
 
 
 ############## Query for WoW API Battlegroups ################
@@ -132,4 +132,14 @@ results = json.loads(response.content.decode('utf-8'))
 # Puts each battlegroup name from our query results into our database
 for bg in results['battlegroups']:
 	db.addBattlegroup(bg['name'])
-	db.commit()
+db.commit()
+
+
+############## Adding Faction info into database ################
+
+# Add Alliance info to database
+db.addFaction("Alliance", 'The Alliance, also known as the Grand Alliance,[2][3] is one of two major political factions of the mortal races in Azeroth, its counterpart being the Horde. The Alliance consists of powerful cultures and groups bound not by desperation or necessity, but by their deep commitments to abstract concepts like nobility and justice,[4] and, striving to represent these high ideals, its many different peoples all contribute their technical, arcane, and spiritual wisdom "toward the goal of a just and peaceful world."')
+
+# Add Horde info to database
+db.addFaction("Horde", "The Horde (also called the New Horde, Thrall's Horde or Vol'jin's Horde) is one of the two major political factions of the mortal races in Azeroth, its counterpart being the Alliance. The Horde, a faction led by off-worlders and composed of outsiders has survived these obstacles by bonding together, fighting as family, comrades, or even uneasy allies.")
+db.commit()
