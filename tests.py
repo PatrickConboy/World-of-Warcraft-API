@@ -44,6 +44,7 @@ contents = get_json(r)
 assert(contents['name'] == 'Human')
 assert(contents['link'] == '/race/Human')
 assert(contents['faction'] == 'alliance')
+assert(contents['playableClass'] == 'Hunter, Mage, Paladin, Priest, Rogue, Warlock, Warrior, Death Knight, Monk')
 
 # Testing a GET on /race/Troll
 r = client.get(base_url + '/race/Troll')
@@ -52,6 +53,7 @@ contents = get_json(r)
 assert(contents['name'] == 'Troll')
 assert(contents['link'] == '/race/Troll')
 assert(contents['faction'] == 'horde')
+assert(contents['playableClass'] == 'Druid, Hunter, Mage, Priest, Rogue, Shaman, Warlock, Warrior, Death Knight, Monk')
 
 # Testing a GET on /race/Human/description
 print("   Testing '/race/<raceName>/description' path...")
@@ -137,6 +139,32 @@ assert('name' in contents)
 assert(contents['name'] == "Horde")
 assert('description' in contents)
 assert(contents['description'] is not None)
+
+# Testing a GET on /role
+print("   Testing '/role' path...")
+r = client.get(base_url + '/role/')
+assert(r.status_code == 200)
+r = client.get(base_url + '/role')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert('roles' in contents)
+assert(contents['roles'][0]['name'] == 'Tank')
+assert(contents['roles'][1]['name'] == 'Healer')
+assert(contents['roles'][2]['name'] == 'Damage Dealer (DPS)')
+
+# Testing a GET on /role/Damage Dealer (DPS)
+print("   Testing '/role/<roleName>' path...")
+r = client.get(base_url + '/role/Damage Dealer (DPS)' + 'LeeroyJenkins')
+assert(r.status_code == 404)
+r = client.get(base_url + '/role/Damage Dealer (DPS)')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert('name' in contents)
+assert(contents['name'] == "Damage Dealer (DPS)")
+assert('description' in contents)
+assert(contents['description'] is not None)
+assert(contents['description'] == "Damage dealers focus on the critical task of dealing damage to the party's foes.")
+
 
 # Testing a GET on /battlegroup
 print("   Testing '/battlegroup' path...")

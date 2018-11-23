@@ -13,7 +13,7 @@
 /race -- this path returns the list of playable races
 /race/<raceName> -- this path returns information on a specific race
 /race/<raceName>/description -- this path returns a description of the race
-/race/<raceName>/class -- TODO: this path returns playable classes for a given race (low priority)
+/race/<raceName>/class -- this path returns playable classes for a given race (low priority)
 
 /class -- this path returns a list of playable classes
 /class/<className> -- this path returns information on a given class.
@@ -21,8 +21,8 @@
 /faction -- this path returns both faction names
 /faction/<factionName> -- this returns a brief summary on a specific faction
 
-/role -- TODO: this path returns list of playable roles in the game
-/role/<roleName> -- TODO: this path returns info on a specific role (Name, description)
+/role -- this path returns list of playable roles in the game
+/role/<roleName> -- this path returns info on a specific role (Name, description)
 
 /arenaStats -- TODO: Returns some statistics on the 3v3 pvp leaderboard
 /battlegroups -- done: Returns list of all the battlegroups

@@ -16,6 +16,7 @@ class Race(Base):
    name        = Column(String(20), nullable = False, primary_key = True)
    id          = Column(Integer, nullable = False, primary_key = True)
    faction     = Column(String(10), nullable = False)
+   playableClass       = Column(String(10), nullable = False)
    description = Column(String(500))
 
    def __repr__(self):
@@ -41,6 +42,16 @@ class Faction(Base):
 
    def __repr__(self):
       return "<Faction: {0}>".format(self.name)
+
+# Class for Role. The three roles have a name and description.
+class Role(Base):
+   __tablename__ = 'roles'
+
+   name        = Column(String(20), nullable = False, primary_key = True)
+   description = Column(String(400))
+
+   def __repr__(self):
+      return "<Role: {0}>".format(self.name)
 
 # Class for Battlegroup. Each battlegroup has a name. 
 class Battlegroup(Base):
@@ -86,8 +97,8 @@ class Db:
 
    # This method adds a new race to our database when given name, id, faction, and description
    # Returns the Race object that got added
-   def addRace(self, name, id, faction, description):
-      newRace = Race(name=name, id=id, faction=faction, description=description)
+   def addRace(self, name, id, faction, playableClass, description):
+      newRace = Race(name=name, id=id, faction=faction, playableClass=playableClass, description=description)
       self.session.add(newRace)
       return newRace
 
@@ -131,6 +142,27 @@ class Db:
       newFaction = Faction(name=name, description=description)
       self.session.add(newFaction)
       return newFaction
+
+
+   ########## METHODS FOR ROLE CLASS ###########
+
+   # This method returns the list of roles in WoW
+   def getRoles(self):
+      return self.session.query(Role).all()
+
+   # This method returns information on one of the three roles
+   # User gives name of which role they want to learn about
+   def getRole(self, name):
+      return self.session.query(Role)\
+                 .filter_by(name=name)\
+                 .one_or_none()
+
+   # This method adds a new role to the database with the given name 
+   # and description, then returns the new role that was created
+   def addRole(self, name, description):
+      newRole = Role(name=name, description=description)
+      self.session.add(newRole)
+      return newRole
 
 
    ########## METHODS FOR CLASS BATTLEGROUP ###########

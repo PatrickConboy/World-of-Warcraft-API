@@ -53,9 +53,11 @@ def race_info(raceName):
    return make_json_response({
       "name": race.name,
       "faction": race.faction,
+      "playableClass": race.playableClass,
       "link": url_for('race_info', raceName=race.name)
    })
 
+# Gives back the description of the specific race
 @app.route('/race/<raceName>/description', methods = ['GET'])
 def race_description(raceName):
    race = db.getRace(raceName)
@@ -65,6 +67,7 @@ def race_description(raceName):
       "description": race.description
    })
 
+#gives back the list of classes
 @app.route('/class', methods = ['GET'])
 def class_list():
    classes = db.getClasses()
@@ -78,6 +81,7 @@ def class_list():
       ]
    })
 
+# gives back information of specific class(power type, role)
 @app.route('/class/<className>', methods = ['GET'])
 def class_info(className):
    givenClass = db.getClass(className)
@@ -90,6 +94,7 @@ def class_info(className):
       "link": url_for('class_info', className=givenClass.name)
    })
 
+#gives back the list of factions
 @app.route('/faction', methods = ['GET'])
 def faction_list():
    factions = db.getFactions()
@@ -103,6 +108,7 @@ def faction_list():
       ]
    })
 
+# gives back description of specific faction
 @app.route('/faction/<factionName>', methods = ['GET'])
 def faction_info(factionName):
    faction = db.getFaction(factionName)
@@ -114,6 +120,36 @@ def faction_info(factionName):
       "link": url_for('faction_info', factionName=faction.name)
    })
 
+
+#gives back the list of roles
+@app.route('/role', methods = ['GET'])
+def role_list():
+   roles = db.getRoles()
+   return make_json_response({
+      "roles": [
+         {
+            "name": role.name,
+            "link": url_for('role_info', roleName=role.name)
+         }
+         for role in roles
+      ]
+   })
+
+
+# gives back description of specific role
+@app.route('/role/<roleName>', methods = ['GET'])
+def role_info(roleName):
+   role = db.getRole(roleName)
+   if role is None:
+       abort(404, 'unknown role name')
+   return make_json_response({
+      "name": role.name,
+      "description": role.description,
+      "link": url_for('role_info', roleName=role.name)
+   })
+
+
+#gives back the list of battlegroups
 @app.route('/battlegroup', methods = ['GET'])
 def battlegroup_list():
    battlegroups = db.getBattlegroups()
