@@ -138,7 +138,7 @@ db.commit()
 ############## Adding Faction info into database ################
 
 # Add Alliance info to database
-db.addFaction("Alliance", 'The Alliance, also known as the Grand Alliance,[2][3] is one of two major political factions of the mortal races in Azeroth, its counterpart being the Horde. The Alliance consists of powerful cultures and groups bound not by desperation or necessity, but by their deep commitments to abstract concepts like nobility and justice,[4] and, striving to represent these high ideals, its many different peoples all contribute their technical, arcane, and spiritual wisdom "toward the goal of a just and peaceful world."')
+db.addFaction("Alliance", 'The Alliance, also known as the Grand Alliance, is one of two major political factions of the mortal races in Azeroth, its counterpart being the Horde. The Alliance consists of powerful cultures and groups bound not by desperation or necessity, but by their deep commitments to abstract concepts like nobility and justice, and, striving to represent these high ideals, its many different peoples all contribute their technical, arcane, and spiritual wisdom "toward the goal of a just and peaceful world."')
 
 # Add Horde info to database
 db.addFaction("Horde", "The Horde (also called the New Horde, Thrall's Horde or Vol'jin's Horde) is one of the two major political factions of the mortal races in Azeroth, its counterpart being the Alliance. The Horde, a faction led by off-worlders and composed of outsiders has survived these obstacles by bonding together, fighting as family, comrades, or even uneasy allies.")
