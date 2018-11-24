@@ -13,11 +13,11 @@ Base = declarative_base()
 class Race(Base):
    __tablename__ = 'races'
 
-   name        = Column(String(20), nullable = False, primary_key = True)
-   id          = Column(Integer, nullable = False, primary_key = True)
-   faction     = Column(String(10), nullable = False)
-   playableClass       = Column(String(10), nullable = False)
-   description = Column(String(500))
+   name            = Column(String(20), nullable = False, primary_key = True)
+   id              = Column(Integer, nullable = False, primary_key = True)
+   faction         = Column(String(10), nullable = False)
+   playableClasses = Column(String(10), nullable = False)
+   description     = Column(String(500))
 
    def __repr__(self):
       return "<Race: {0}>".format(self.name)
@@ -107,8 +107,8 @@ class Db:
 
    # This method adds a new race to our database when given name, id, faction, and description
    # Returns the Race object that got added
-   def addRace(self, name, id, faction, playableClass, description):
-      newRace = Race(name=name, id=id, faction=faction, playableClass=playableClass, description=description)
+   def addRace(self, name, id, faction, playableClasses, description):
+      newRace = Race(name=name, id=id, faction=faction, playableClasses=playableClasses, description=description)
       self.session.add(newRace)
       return newRace
 

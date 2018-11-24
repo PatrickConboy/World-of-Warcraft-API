@@ -53,11 +53,11 @@ def race_info(raceName):
    return make_json_response({
       "name": race.name,
       "faction": race.faction,
-      "playableClass": race.playableClass,
+      "playableClass": race.playableClasses,
       "link": url_for('race_info', raceName=race.name)
    })
 
-# This route ives back the description of the specific race
+# This route gives back the description of the specific race
 @app.route('/race/<raceName>/description', methods = ['GET'])
 def race_description(raceName):
    race = db.getRace(raceName)
@@ -175,10 +175,7 @@ def info_for_2v2_ladder():
    if arenaInfo == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "2v2arena":
-         {
-            "info": arenaInfo.statistic
-         }
+      "info": arenaInfo.statistic
    })
 
 # This route returns the name and rating of the highest ranked player in the 2v2 ladder
@@ -188,11 +185,8 @@ def highest_rank_2v2():
    if highestRank == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "player":
-         {
-            "name": highestRank.description,
-            "rating": highestRank.statistic
-         }
+      "name": highestRank.description,
+      "rating": highestRank.statistic
    })
 
 # This route returns the total number of gladiators currently in the 2v2 ladder
@@ -202,10 +196,7 @@ def number_of_2v2_gladiators():
    if gladiators == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "gladiators":
-         {
-            "number": gladiators.statistic
-         }
+      "number": gladiators.statistic
    })
 
 # This route returns the top 5 servers with the most gladiators on them in the 2v2 ladder
@@ -215,10 +206,7 @@ def top_2v2_servers():
    if servers == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "servers":
-         {
-            "name": servers.statistic
-         }
+      "servers": servers.statistic
    })
 
 # This route returns basic info on the 3v3 ladder
@@ -228,10 +216,7 @@ def info_for_3v3_ladder():
    if arenaInfo == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "3v3arena":
-         {
-            "info": arenaInfo.statistic
-         }
+      "info": arenaInfo.statistic
    })
 
 # This route returns the name and rating of the highest ranked player in the 3v3 ladder
@@ -241,11 +226,8 @@ def highest_rank_3v3():
    if highestRank == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "player":
-         {
-            "name": highestRank.description,
-            "rating": highestRank.statistic
-         }
+      "name": highestRank.description,
+      "rating": highestRank.statistic
    })
 
 # This route returns the total number of gladiators currently in the 3v3 ladder
@@ -255,10 +237,7 @@ def number_of_3v3_gladiators():
    if gladiators == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "gladiators":
-         {
-            "number": gladiators.statistic
-         }
+      "number": gladiators.statistic
    })
 
 # This route returns the top 5 servers with the most gladiators on them in the 3v3 ladder
@@ -268,10 +247,7 @@ def top_3v3_servers():
    if servers == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "servers":
-         {
-            "name": servers.statistic
-         }
+      "servers": servers.statistic
    })
 
 # This route returns basic info on the RBG ladder
@@ -281,10 +257,7 @@ def info_for_RBG_ladder():
    if RBGInfo == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "RBG":
-         {
-            "info": RBGInfo.statistic
-         }
+      "info": RBGInfo.statistic
    })
 
 # This route returns the name and rating of the highest ranked player in the RBG ladder
@@ -294,11 +267,8 @@ def highest_rank_RBG():
    if highestRank == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "player":
-         {
-            "name": highestRank.description,
-            "rating": highestRank.statistic
-         }
+      "name": highestRank.description,
+      "rating": highestRank.statistic
    })
 
 # This route returns the total number of gladiators currently in the RBG ladder
@@ -308,10 +278,7 @@ def number_of_RBG_gladiators():
    if gladiators == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "gladiators":
-         {
-            "number": gladiators.statistic
-         }
+      "number": gladiators.statistic
    })
 
 # This route returns the top 5 servers with the most gladiators on them in the RBG ladder
@@ -321,10 +288,7 @@ def top_RBG_servers():
    if servers == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "servers":
-         {
-            "name": servers.statistic
-         }
+      "servers": servers.statistic
    })
 
 ## HELPER METHODS
