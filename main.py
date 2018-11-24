@@ -29,7 +29,7 @@ def client_error(e):
 
 #### MAIN ROUTES
 
-# This route '/race' allows user to get the list of all the races in our database
+# This route allows user to get the list of all the races in our database
 @app.route('/race', methods = ['GET'])
 def race_list():
    races = db.getRaces()
@@ -43,7 +43,7 @@ def race_list():
       ]
    })
 
-# This route '/race/<raceName>' allows user to get a specific race from the database when they
+# This route allows user to get a specific race from the database when they
 # pass in a race name
 @app.route('/race/<raceName>', methods = ['GET'])
 def race_info(raceName):
@@ -71,6 +71,8 @@ def race_description(raceName):
 @app.route('/class', methods = ['GET'])
 def class_list():
    classes = db.getClasses()
+   if classes == None:
+      abort(404, 'classes not found')
    return make_json_response({
       "classes": [
          {
@@ -98,6 +100,8 @@ def class_info(className):
 @app.route('/faction', methods = ['GET'])
 def faction_list():
    factions = db.getFactions()
+   if factions == None:
+      abort(404, 'factions not found')
    return make_json_response({
       "factions": [
          {
@@ -153,6 +157,8 @@ def role_info(roleName):
 @app.route('/battlegroup', methods = ['GET'])
 def battlegroup_list():
    battlegroups = db.getBattlegroups()
+   if battlegroups == None:
+      abort(404, 'battlegroups not found not found')
    return make_json_response({
       "battlegroups": [
          {
@@ -162,6 +168,58 @@ def battlegroup_list():
       ]
    })
 
+# This route returns basic info on the 3v3 ladder
+@app.route('/3v3arena', methods = ['GET'])
+def info_for_3v3_ladder():
+   arenaInfo = db.getArenaStat("Info")
+   if arenaInfo == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "3v3arena": 
+         {
+            "info": arenaInfo.statistic
+         }
+   })
+
+# This route returns the name and rating of the highest ranked player in the 3v3 ladder
+@app.route('/3v3arena/highestRankedPlayer', methods = ['GET'])
+def highestRank3v3():
+   highestRank = db.getArenaStat("Top 3v3 Player")
+   if highestRank == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "player": 
+         {
+            "name": highestRank.description,
+            "rating": highestRank.statistic
+         }
+   })
+
+# This route returns the total number of gladiators currently in the 3v3 ladder
+@app.route('/3v3arena/gladiatorTotal', methods = ['GET'])
+def numberOf3v3Gladiators():
+   gladiators = db.getArenaStat("Number of 3v3 Gladiators")
+   if gladiators == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "gladiators": 
+         {
+            "number": gladiators.statistic
+         }
+   })
+
+# This route returns the top 5 servers with the most gladiators on them
+@app.route('/3v3arena/topServers', methods = ['GET'])
+def top3v3Servers():
+   servers = db.getArenaStat("Top 3v3 Servers")
+   if servers == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "servers": 
+         {
+            "name": servers.statistic
+         }
+   })
 
 ## HELPER METHODS
 
