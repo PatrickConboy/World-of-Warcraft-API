@@ -274,6 +274,59 @@ def top_3v3_servers():
          }
    })
 
+# This route returns basic info on the rbg ladder
+@app.route('/RBG', methods = ['GET'])
+def info_for_rbg_ladder():
+   arenaInfo = db.getArenaStat("rbg Info")
+   if arenaInfo == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "RBG":
+         {
+            "info": arenaInfo.statistic
+         }
+   })
+
+# This route returns the name and rating of the highest ranked player in the rbg ladder
+@app.route('/RBG/highestRankedPlayer', methods = ['GET'])
+def highest_rank_rbg():
+   highestRank = db.getArenaStat("Top rbg Player")
+   if highestRank == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "player":
+         {
+            "name": highestRank.description,
+            "rating": highestRank.statistic
+         }
+   })
+
+# This route returns the total number of gladiators currently in the rbg ladder
+@app.route('/RBG/gladiatorTotal', methods = ['GET'])
+def number_of_rbg_gladiators():
+   gladiators = db.getArenaStat("Number of rbg Gladiators")
+   if gladiators == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "gladiators":
+         {
+            "number": gladiators.statistic
+         }
+   })
+
+# This route returns the top 5 servers with the most gladiators on them in the rbg ladder
+@app.route('/RBG/topServers', methods = ['GET'])
+def top_rbg_servers():
+   servers = db.getArenaStat("Top rbg Servers")
+   if servers == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "servers":
+         {
+            "name": servers.statistic
+         }
+   })
+
 ## HELPER METHODS
 
 ## Helper method for creating JSON responses
