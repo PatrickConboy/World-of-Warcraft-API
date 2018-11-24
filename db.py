@@ -53,7 +53,7 @@ class Role(Base):
    def __repr__(self):
       return "<Role: {0}>".format(self.name)
 
-# Class for Battlegroup. Each battlegroup has a name. 
+# Class for Battlegroup. Each battlegroup has a name.
 class Battlegroup(Base):
    __tablename__ = 'battlegroups'
 
@@ -63,10 +63,10 @@ class Battlegroup(Base):
       return "<Battlegroup Name: {0}>".format(self.name)
 
 class Stat(Base):
-   __tablename__ = 'arena_stats'
+   __tablename__ = 'stats'
 
    name        = Column(String(40), nullable = False, primary_key = True)
-   statistic   = Column(String(100), nullable = False)
+   statistic   = Column(String(100), nullable = False, primary_key = True)
    description = Column(String(50))
 
    def __repr__(self):
@@ -175,7 +175,7 @@ class Db:
                  .filter_by(name=name)\
                  .one_or_none()
 
-   # This method adds a new role to the database with the given name 
+   # This method adds a new role to the database with the given name
    # and description, then returns the new role that was created
    def addRole(self, name, description):
       newRole = Role(name=name, description=description)
@@ -185,9 +185,7 @@ class Db:
    def deleteRole(self, role):
       self.session.delete(role)
 
-
-
-   ########## METHODS FOR CLASS BATTLEGROUP ###########
+   ########## METHODS FOR BATTLEGROUP CLASS ###########
 
    # This methods returns the list of battlegroups in WoW
    def getBattlegroups(self):
@@ -199,11 +197,8 @@ class Db:
       self.session.add(newbg)
       return newbg
 
-   def deleteBattlegroup(self, battlegroup):
-      self.session.delete(battlegroup)
 
-
-   ########## METHODS FOR CLASS ArenaStats ###########
+   ########## METHODS FOR STAT CLASS ###########
 
    # This method returns the list of all arena stats in our database
    def getStats(self):
