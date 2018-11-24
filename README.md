@@ -1,7 +1,7 @@
 # Project for CS328 - Data Management/Data Wrangling
 # Coded by: Od Ganzorig and Patrick Conboy
 # Date Created: 9/18/2018
-# Project Description: Our project pulls data from various websites and API's,
+# Project Description: Our project pulls data from the Blizzard WoW API,
 # puts that data into our database, and then implements a basic web API that a user
 # can use to access the World of Warcraft info stored in our database.
 
@@ -13,7 +13,6 @@
 /race                         -- this path returns the list of playable races
 /race/<raceName>              -- this path returns information on a specific race
 /race/<raceName>/description  -- this path returns a description of the race
-/race/<raceName>/class        -- this path returns playable classes for a given race (low priority)
 
 /class                        -- this path returns a list of playable classes
 /class/<className>            -- this path returns information on a given class.
@@ -34,18 +33,14 @@
 /3v3arena/gladiatorTotal      -- returns the total number of gladiators in the 3v3 ladder
 /3v3arena/topServers          -- returns the top five servers with most players in the top 5000 on the 3v3 ladder
 
-/RBG                     -- TODO: returns some info on the RBG pvp leaderboard (low priority)
-/RBG/highestRankedPlayer -- TODO: returns the top player in the RBG ladder and their rating (low priority)
-/RBG/gladiatorTotal      -- TODO: returns the total number of gladiators in the RBG ladder (low priority)
-/RBG/topServers          -- TODO: returns the top five servers with most players in the top 5000 on the RBG ladder (low priority)
+/RBG                          -- returns some info on the RBG pvp leaderboard (low priority)
+/RBG/highestRankedPlayer      -- returns the top player in the RBG ladder and their rating (low priority)
+/RBG/gladiatorTotal           -- returns the total number of gladiators in the RBG ladder (low priority)
+/RBG/topServers               -- returns the top five servers with most players in the top 5000 on the RBG ladder (low priority)
 
 /battlegroups                 -- returns list of all the battlegroups
 
-TODO: Some JSON payloads are being returns as a list with a dictionary inside. Might need to change this
-      for some of our endpoints (low priority)
 
-      Add db tests for new classes and methods that have been added (high priority)
 
-      Make sure names of methods in main.py are all using underscores and not camel case (high priority)
+TODO: Refactor before finishing (high priority)
 
-      Refactor before finishing (high priority)
