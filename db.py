@@ -112,6 +112,9 @@ class Db:
       self.session.add(newRace)
       return newRace
 
+   def deleteRace(self, race):
+      self.session.delete(race)
+
 
    ########## METHODS FOR CLASS CLASS ###########
 
@@ -131,6 +134,9 @@ class Db:
       newClass = Class(name=name, powerType=powerType, roles=roles)
       self.session.add(newClass)
       return newClass
+
+   def deleteClass(self, class_name):
+      self.session.delete(class_name)
 
 
    ########## METHODS FOR FACTION CLASS ###########
@@ -153,6 +159,8 @@ class Db:
       self.session.add(newFaction)
       return newFaction
 
+   def deleteFaction(self, faction):
+      self.session.delete(faction)
 
    ########## METHODS FOR ROLE CLASS ###########
 
@@ -174,6 +182,8 @@ class Db:
       self.session.add(newRole)
       return newRole
 
+   def deleteRole(self, role):
+      self.session.delete(role)
 
    ########## METHODS FOR BATTLEGROUP CLASS ###########
 
@@ -186,7 +196,6 @@ class Db:
       newbg = Battlegroup(name=name)
       self.session.add(newbg)
       return newbg
-
 
    ########## METHODS FOR STAT CLASS ###########
 
@@ -205,3 +214,6 @@ class Db:
       newStat = Stat(name=name, statistic=stat, description=description,)
       self.session.add(newStat)
       return newStat
+
+   def deleteStat(self, stat):
+      self.session.delete(stat)
