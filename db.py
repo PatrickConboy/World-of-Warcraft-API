@@ -197,7 +197,6 @@ class Db:
       self.session.add(newbg)
       return newbg
 
-
    ########## METHODS FOR STAT CLASS ###########
 
    # This method returns the list of all arena stats in our database
