@@ -168,10 +168,63 @@ def battlegroup_list():
       ]
    })
 
+# This route returns basic info on the 2v2 ladder
+@app.route('/2v2arena', methods = ['GET'])
+def info_for_2v2_ladder():
+   arenaInfo = db.getArenaStat("2v2 Info")
+   if arenaInfo == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "2v2arena":
+         {
+            "info": arenaInfo.statistic
+         }
+   })
+
+# This route returns the name and rating of the highest ranked player in the 2v2 ladder
+@app.route('/2v2arena/highestRankedPlayer', methods = ['GET'])
+def highest_rank_2v2():
+   highestRank = db.getArenaStat("Top 2v2 Player")
+   if highestRank == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "player":
+         {
+            "name": highestRank.description,
+            "rating": highestRank.statistic
+         }
+   })
+
+# This route returns the total number of gladiators currently in the 2v2 ladder
+@app.route('/2v2arena/gladiatorTotal', methods = ['GET'])
+def number_of_2v2_gladiators():
+   gladiators = db.getArenaStat("Number of 2v2 Gladiators")
+   if gladiators == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "gladiators":
+         {
+            "number": gladiators.statistic
+         }
+   })
+
+# This route returns the top 5 servers with the most gladiators on them in the 2v2 ladder
+@app.route('/2v2arena/topServers', methods = ['GET'])
+def top_2v2_servers():
+   servers = db.getArenaStat("Top 2v2 Servers")
+   if servers == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "servers":
+         {
+            "name": servers.statistic
+         }
+   })
+
 # This route returns basic info on the 3v3 ladder
 @app.route('/3v3arena', methods = ['GET'])
 def info_for_3v3_ladder():
-   arenaInfo = db.getArenaStat("Info")
+   arenaInfo = db.getArenaStat("3v3 Info")
    if arenaInfo == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -208,7 +261,7 @@ def number_of_3v3_gladiators():
          }
    })
 
-# This route returns the top 5 servers with the most gladiators on them
+# This route returns the top 5 servers with the most gladiators on them in the 3v3 ladder
 @app.route('/3v3arena/topServers', methods = ['GET'])
 def top_3v3_servers():
    servers = db.getArenaStat("Top 3v3 Servers")

@@ -53,7 +53,7 @@ class Role(Base):
    def __repr__(self):
       return "<Role: {0}>".format(self.name)
 
-# Class for Battlegroup. Each battlegroup has a name. 
+# Class for Battlegroup. Each battlegroup has a name.
 class Battlegroup(Base):
    __tablename__ = 'battlegroups'
 
@@ -66,7 +66,7 @@ class ArenaStat(Base):
    __tablename__ = 'arena_stats'
 
    name        = Column(String(40), nullable = False, primary_key = True)
-   statistic   = Column(String(100), nullable = False)
+   statistic   = Column(String(100), nullable = False, primary_key = True)
    description = Column(String(50))
 
    def __repr__(self):
@@ -167,7 +167,7 @@ class Db:
                  .filter_by(name=name)\
                  .one_or_none()
 
-   # This method adds a new role to the database with the given name 
+   # This method adds a new role to the database with the given name
    # and description, then returns the new role that was created
    def addRole(self, name, description):
       newRole = Role(name=name, description=description)

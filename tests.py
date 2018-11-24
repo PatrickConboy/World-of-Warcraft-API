@@ -73,7 +73,7 @@ assert('description' in contents)
 assert(contents['description'] == "Descended from Huln, brave hero of the War of the Ancients, the Highmountain tauren honor the spirits of earth, river, and sky. Though the Legion invaded their lands and sowed seeds of distrust between them, the tribes of Highmountain stand united once more. At long last they are ready to venture beyond their sacred mountain and stand beside their kin from Kalimdor, lending their nobility and strength to the mighty Horde.")
 
 # Testing a GET on /class
-print("   Testing '/class' path...") 
+print("   Testing '/class' path...")
 r = client.get('/class' + 'wah')
 assert(r.status_code == 404)
 r = client.get('/class')
@@ -165,7 +165,6 @@ assert('description' in contents)
 assert(contents['description'] is not None)
 assert(contents['description'] == "Damage dealers focus on the critical task of dealing damage to the party's foes.")
 
-
 # Testing a GET on /battlegroup
 print("   Testing '/battlegroup' path...")
 r = client.get('/battlegroup' + 'fail')
@@ -175,6 +174,46 @@ assert(r.status_code == 200)
 contents = get_json(r)
 assert("battlegroups" in contents)
 assert(len(contents["battlegroups"]) == 9)
+
+# Testing a GET on /2v2arena/highestRankedPlayer
+print("   Testing '/2v2arena' path...")
+r = client.get('/2v2arena' + 'hello')
+assert(r.status_code == 404)
+r = client.get('/2v2arena')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert("2v2arena" in contents)
+assert(contents['2v2arena']['info'] == "The /2v2arena endpoints in this API provide different statistics and information based on the top 5000 players in the WoW 2v2 ladder.")
+
+# Testing a GET on /2v2arena/highestRankedPlayer
+print("   Testing '/2v2arena/highestRankedPlayer' path...")
+r = client.get('/2v2arena/highestRankedPlayer' + 'hello')
+assert(r.status_code == 404)
+r = client.get('/2v2arena/highestRankedPlayer')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert("player" in contents)
+assert(len(contents) == 1)
+assert('name' in contents['player'])
+assert('rating' in contents['player'])
+
+# Testing a GET on /2v2arena/gladiatorTotal
+print("   Testing '/2v2arena/gladiatorTotal' path...")
+r = client.get('/2v2arena/gladiatorTotal' + 'hello')
+assert(r.status_code == 404)
+r = client.get('/2v2arena/gladiatorTotal')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert("gladiators" in contents)
+
+# Testing a GET on /2v2arena/topServers
+print("   Testing '/2v2arena/topServers' path...")
+r = client.get('/2v2arena/topServers' + 'hello')
+assert(r.status_code == 404)
+r = client.get('/2v2arena/topServers')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert("servers" in contents)
 
 # Testing a GET on /3v3arena/highestRankedPlayer
 print("   Testing '/3v3arena' path...")

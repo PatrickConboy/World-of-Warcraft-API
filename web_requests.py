@@ -158,6 +158,50 @@ for bg in results['battlegroups']:
 db.commit()
 
 
+
+############## Query for WoW API 2v2 Arenas ################
+
+# Explanation of what these individual lines are doing is the
+# same as the above query above for WoW API Races
+page = 'leaderboard/2v2?locale=en_US&access_token=USZbPYtne1FhueFiwAR7PKRHU8ODXtGwTq'
+req_url = base_url + page
+response = oauth.get(req_url)
+results = json.loads(response.content.decode('utf-8'))
+
+# Adds a basic description of the 2v2 ladder
+db.addArenaStat("2v2 Info",
+               "The /2v2arena endpoints in this API provide different statistics and information based on the top 5000 players in the WoW 2v2 ladder.",
+               None)
+
+# Adds highest ranked player to our database for arena stats
+db.addArenaStat("Top 2v2 Player", str(results['rows'][0]['rating']), results['rows'][0]['name'])
+
+# This code pulls all players who are in the gladiator tier of the 2v2 arena ladder
+# and then counts the number of gladiators and puts that statistic in our database
+gladiators  = [player['name'] for player in results['rows'] if player['tier'] == 'Gladiator']
+db.addArenaStat("Number of 2v2 Gladiators", str(len(gladiators)), None)
+
+# Put all server name mentions into a dictionary and count how many times each server mentioned
+serverCounts = {}
+for player in results['rows']:
+   if player['realmName'] in serverCounts:
+      serverCounts[player['realmName']] += 1
+   else:
+      serverCounts[player['realmName']] = 1
+
+# Sort our dictionary of server names by the number of times each server was mentioned
+sortedServerCounts = sorted(serverCounts.items(), key=operator.itemgetter(1), reverse=True)
+
+# Take out the first 5 servers mentioned in our dictionary and put them into a list
+topFive = []
+for i in range(0,5):
+  topFive.append(sortedServerCounts[i])
+
+# Add our top 5 server list to the database
+db.addArenaStat("Top 2v2 Servers", str(topFive), None)
+db.commit()
+
+
 ############## Query for WoW API 3v3 Arenas ################
 
 # Explanation of what these individual lines are doing is the
@@ -168,19 +212,17 @@ response = oauth.get(req_url)
 results = json.loads(response.content.decode('utf-8'))
 
 # Adds a basic description of the 3v3 ladder
-db.addArenaStat("Info", 
+db.addArenaStat("3v3 Info",
                "The /3v3arena endpoints in this API provide different statistics and information based on the top 5000 players in the WoW 3v3 ladder.",
                None)
 
 # Adds highest ranked player to our database for arena stats
 db.addArenaStat("Top 3v3 Player", str(results['rows'][0]['rating']), results['rows'][0]['name'])
-db.commit()
 
 # This code pulls all players who are in the gladiator tier of the 3v3 arena ladder
 # and then counts the number of gladiators and puts that statistic in our database
 gladiators  = [player['name'] for player in results['rows'] if player['tier'] == 'Gladiator']
 db.addArenaStat("Number of 3v3 Gladiators", str(len(gladiators)), None)
-db.commit()
 
 # Put all server name mentions into a dictionary and count how many times each server mentioned
 serverCounts = {}
