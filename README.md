@@ -24,31 +24,25 @@
 /role                         -- this path returns list of playable roles in the game (high priority)
 /role/<roleName>              -- this path returns info on a specific role (Name, description) (high priority)
 
-/2v2arena                     -- TODO: returns some info on the 2v2 pvp leaderboard (low priority)
-/2v2arena/highestRankedPlayer -- TODO: returns the top player in the 2v2 ladder and their rating (low priority)
-/2v2arena/gladiatorTotal      -- TODO: returns the total number of gladiators in the 2v2 ladder (low priority)
-/2v2arena/topServers          -- TODO: returns the top five servers with most players in the top 5000 on the 2v2 ladder (low priority)
+/2v2arena                     -- returns some info on the 2v2 pvp leaderboard (low priority)
+/2v2arena/highestRankedPlayer -- returns the top player in the 2v2 ladder and their rating (low priority)
+/2v2arena/gladiatorTotal      -- returns the total number of gladiators in the 2v2 ladder (low priority)
+/2v2arena/topServers          -- returns the top five servers with most players in the top 5000 on the 2v2 ladder (low priority)
 
 /3v3arena                     -- returns some info on the 3v3 pvp leaderboard
 /3v3arena/highestRankedPlayer -- returns the top player in the 3v3 ladder and their rating
 /3v3arena/gladiatorTotal      -- returns the total number of gladiators in the 3v3 ladder
 /3v3arena/topServers          -- returns the top five servers with most players in the top 5000 on the 3v3 ladder
 
-/5v5arena                     -- TODO: returns some info on the 5v5 pvp leaderboard (low priority)
-/5v5arena/highestRankedPlayer -- TODO: returns the top player in the 5v5 ladder and their rating (low priority)
-/5v5arena/gladiatorTotal      -- TODO: returns the total number of gladiators in the 5v5 ladder (low priority)
-/5v5arena/topServers          -- TODO: returns the top five servers with most players in the top 5000 on the 5v5 ladder (low priority)
+/RBG                     -- TODO: returns some info on the RBG pvp leaderboard (low priority)
+/RBG/highestRankedPlayer -- TODO: returns the top player in the RBG ladder and their rating (low priority)
+/RBG/gladiatorTotal      -- TODO: returns the total number of gladiators in the RBG ladder (low priority)
+/RBG/topServers          -- TODO: returns the top five servers with most players in the top 5000 on the RBG ladder (low priority)
 
 /battlegroups                 -- returns list of all the battlegroups
 
 TODO: Some JSON payloads are being returns as a list with a dictionary inside. Might need to change this
       for some of our endpoints (low priority)
-
-      Add 2v2arena stuff (low priority)
-
-      Add 5v5arena stuff (low priority)
-
-      Possibly add info on RBGs (low priority)
 
       Add db tests for new classes and methods that have been added (high priority)
 
