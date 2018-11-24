@@ -152,11 +152,12 @@ response = oauth.get(req_url)
 results = json.loads(response.content.decode('utf-8'))
 
 # Adds highest ranked player to our database for arena stats
-db.addArenaStat("Top 3v3 Player", results['rows'][0]['name'], results['rows'][0]['rating'])
+db.addArenaStat("Top 3v3 Player", results['rows'][0]['rating'], results['rows'][0]['name'])
 db.commit()
 
-# This code is wip
+# This code pulls all players who are in the gladiator tier of the 3v3 arena ladder
+# and then counts the number of gladiators and puts that statistic in our database
 gladiators  = [player['name'] for player in results['rows'] if player['tier'] == 'Gladiator']
-duelists    = [player['name'] for player in results['rows'] if player['tier'] == 'Duelist']
-rivals      = [player['name'] for player in results['rows'] if player['tier'] == 'Rival']
-challengers = [player['name'] for player in results['rows'] if player['tier'] == 'Challenger']
+db.addArenaStat("Number of Gladiators", len(gladiators), None)
+db.commit()
+

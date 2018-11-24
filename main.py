@@ -29,7 +29,7 @@ def client_error(e):
 
 #### MAIN ROUTES
 
-# This route '/race' allows user to get the list of all the races in our database
+# This route allows user to get the list of all the races in our database
 @app.route('/race', methods = ['GET'])
 def race_list():
    races = db.getRaces()
@@ -43,7 +43,7 @@ def race_list():
       ]
    })
 
-# This route '/race/<raceName>' allows user to get a specific race from the database when they
+# This route allows user to get a specific race from the database when they
 # pass in a race name
 @app.route('/race/<raceName>', methods = ['GET'])
 def race_info(raceName):
@@ -126,7 +126,8 @@ def battlegroup_list():
       ]
    })
 
-@app.route('/3v3arena/highestRank', methods = ['GET'])
+# This route returns the name and rating of the highest ranked player in the 3v3 ladder
+@app.route('/3v3arena/highestRankedPlayer', methods = ['GET'])
 def highestRank3v3():
    highestRank = db.getArenaStat("Top 3v3 Player")
    return make_json_response({
@@ -134,6 +135,19 @@ def highestRank3v3():
          {
             "player name": highestRank.description,
             "rating": highestRank.statistic
+         }
+   })
+
+# This route returns the total number of gladiators currently in the 3v3 ladder
+@app.route('/3v3arena/gladiatorTotal', methods = ['GET'])
+def numberOfGladiators():
+   gladiators = db.getArenaStat("Number of Gladiators")
+   if gladiators == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "gladiators": 
+         {
+            "number": gladiators.statistic
          }
    })
 
