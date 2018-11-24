@@ -62,7 +62,7 @@ class Battlegroup(Base):
    def __repr__(self):
       return "<Battlegroup Name: {0}>".format(self.name)
 
-class ArenaStat(Base):
+class Stat(Base):
    __tablename__ = 'arena_stats'
 
    name        = Column(String(40), nullable = False, primary_key = True)
@@ -112,6 +112,9 @@ class Db:
       self.session.add(newRace)
       return newRace
 
+   def deleteRace(self, race):
+      self.session.delete(race)
+
 
    ########## METHODS FOR CLASS CLASS ###########
 
@@ -131,6 +134,9 @@ class Db:
       newClass = Class(name=name, powerType=powerType, roles=roles)
       self.session.add(newClass)
       return newClass
+
+   def deleteClass(self, class_name):
+      self.session.delete(class_name)
 
 
    ########## METHODS FOR FACTION CLASS ###########
@@ -153,6 +159,8 @@ class Db:
       self.session.add(newFaction)
       return newFaction
 
+   def deleteFaction(self, faction):
+      self.session.delete(faction)
 
    ########## METHODS FOR ROLE CLASS ###########
 
@@ -174,6 +182,10 @@ class Db:
       self.session.add(newRole)
       return newRole
 
+   def deleteRole(self, role):
+      self.session.delete(role)
+
+
 
    ########## METHODS FOR CLASS BATTLEGROUP ###########
 
@@ -187,18 +199,27 @@ class Db:
       self.session.add(newbg)
       return newbg
 
+   def deleteBattlegroup(self, battlegroup):
+      self.session.delete(battlegroup)
+
+
+   ########## METHODS FOR CLASS ArenaStats ###########
+
    # This method returns the list of all arena stats in our database
-   def getArenaStats(self):
-      return self.session.query(ArenaStat).all()
+   def getStats(self):
+      return self.session.query(Stat).all()
 
    # This method returns a specific statistic when given a name of a stat
-   def getArenaStat(self, name):
-      return self.session.query(ArenaStat)\
+   def getStat(self, name):
+      return self.session.query(Stat)\
                  .filter_by(name=name)\
                  .one_or_none()
 
    # This method adds a new arena stat to our database
-   def addArenaStat(self, name, stat, description):
-      newStat = ArenaStat(name=name, statistic=stat, description=description,)
+   def addStat(self, name, stat, description):
+      newStat = Stat(name=name, statistic=stat, description=description,)
       self.session.add(newStat)
       return newStat
+
+   def deleteStat(self, stat):
+      self.session.delete(stat)

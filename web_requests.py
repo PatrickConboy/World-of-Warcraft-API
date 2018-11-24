@@ -168,18 +168,18 @@ response = oauth.get(req_url)
 results = json.loads(response.content.decode('utf-8'))
 
 # Adds a basic description of the 3v3 ladder
-db.addArenaStat("Info", 
+db.addStat("Info", 
                "The /3v3arena endpoints in this API provide different statistics and information based on the top 5000 players in the WoW 3v3 ladder.",
                None)
 
 # Adds highest ranked player to our database for arena stats
-db.addArenaStat("Top 3v3 Player", str(results['rows'][0]['rating']), results['rows'][0]['name'])
+db.addStat("Top 3v3 Player", str(results['rows'][0]['rating']), results['rows'][0]['name'])
 db.commit()
 
 # This code pulls all players who are in the gladiator tier of the 3v3 arena ladder
 # and then counts the number of gladiators and puts that statistic in our database
 gladiators  = [player['name'] for player in results['rows'] if player['tier'] == 'Gladiator']
-db.addArenaStat("Number of 3v3 Gladiators", str(len(gladiators)), None)
+db.addStat("Number of 3v3 Gladiators", str(len(gladiators)), None)
 db.commit()
 
 # Put all server name mentions into a dictionary and count how many times each server mentioned
@@ -199,5 +199,5 @@ for i in range(0,5):
   topFive.append(sortedServerCounts[i])
 
 # Add our top 5 server list to the database
-db.addArenaStat("Top 3v3 Servers", str(topFive), None)
+db.addStat("Top 3v3 Servers", str(topFive), None)
 db.commit()
