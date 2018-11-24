@@ -57,7 +57,7 @@ def race_info(raceName):
       "link": url_for('race_info', raceName=race.name)
    })
 
-# Gives back the description of the specific race
+# This route ives back the description of the specific race
 @app.route('/race/<raceName>/description', methods = ['GET'])
 def race_description(raceName):
    race = db.getRace(raceName)
@@ -67,7 +67,7 @@ def race_description(raceName):
       "description": race.description
    })
 
-#gives back the list of classes
+# This route gives back the list of classes
 @app.route('/class', methods = ['GET'])
 def class_list():
    classes = db.getClasses()
@@ -83,7 +83,7 @@ def class_list():
       ]
    })
 
-# gives back information of specific class(power type, role)
+# This route gives back information of specific class(power type, role)
 @app.route('/class/<className>', methods = ['GET'])
 def class_info(className):
    givenClass = db.getClass(className)
@@ -96,7 +96,7 @@ def class_info(className):
       "link": url_for('class_info', className=givenClass.name)
    })
 
-#gives back the list of factions
+# This route gives back the list of factions
 @app.route('/faction', methods = ['GET'])
 def faction_list():
    factions = db.getFactions()
@@ -112,7 +112,7 @@ def faction_list():
       ]
    })
 
-# gives back description of specific faction
+# This route gives back description of specific faction
 @app.route('/faction/<factionName>', methods = ['GET'])
 def faction_info(factionName):
    faction = db.getFaction(factionName)
@@ -125,7 +125,7 @@ def faction_info(factionName):
    })
 
 
-#gives back the list of roles
+# This route gives back the list of roles
 @app.route('/role', methods = ['GET'])
 def role_list():
    roles = db.getRoles()
@@ -140,7 +140,7 @@ def role_list():
    })
 
 
-# gives back description of specific role
+# This route gives back description of specific role
 @app.route('/role/<roleName>', methods = ['GET'])
 def role_info(roleName):
    role = db.getRole(roleName)
@@ -153,7 +153,7 @@ def role_info(roleName):
    })
 
 
-#gives back the list of battlegroups
+# This route gives back the list of battlegroups
 @app.route('/battlegroup', methods = ['GET'])
 def battlegroup_list():
    battlegroups = db.getBattlegroups()
@@ -175,7 +175,7 @@ def info_for_3v3_ladder():
    if arenaInfo == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "3v3arena": 
+      "3v3arena":
          {
             "info": arenaInfo.statistic
          }
@@ -183,12 +183,12 @@ def info_for_3v3_ladder():
 
 # This route returns the name and rating of the highest ranked player in the 3v3 ladder
 @app.route('/3v3arena/highestRankedPlayer', methods = ['GET'])
-def highestRank3v3():
+def highest_rank_3v3():
    highestRank = db.getArenaStat("Top 3v3 Player")
    if highestRank == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "player": 
+      "player":
          {
             "name": highestRank.description,
             "rating": highestRank.statistic
@@ -197,12 +197,12 @@ def highestRank3v3():
 
 # This route returns the total number of gladiators currently in the 3v3 ladder
 @app.route('/3v3arena/gladiatorTotal', methods = ['GET'])
-def numberOf3v3Gladiators():
+def number_of_3v3_gladiators():
    gladiators = db.getArenaStat("Number of 3v3 Gladiators")
    if gladiators == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "gladiators": 
+      "gladiators":
          {
             "number": gladiators.statistic
          }
@@ -210,12 +210,12 @@ def numberOf3v3Gladiators():
 
 # This route returns the top 5 servers with the most gladiators on them
 @app.route('/3v3arena/topServers', methods = ['GET'])
-def top3v3Servers():
+def top_3v3_servers():
    servers = db.getArenaStat("Top 3v3 Servers")
    if servers == None:
       abort(404, 'statistic not found')
    return make_json_response({
-      "servers": 
+      "servers":
          {
             "name": servers.statistic
          }
