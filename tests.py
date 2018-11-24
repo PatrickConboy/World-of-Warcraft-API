@@ -263,7 +263,7 @@ r = client.get('/RBG')
 assert(r.status_code == 200)
 contents = get_json(r)
 assert("RBG" in contents)
-assert(contents['RBG']['info'] == "The /RBG endpoints in this API provide different statistics and information based on the top 5000 players in the WoW rbg ladder.")
+assert(contents['RBG']['info'] == "The /RBG endpoints in this API provide different statistics and information based on the top 5000 players in the WoW RBG ladder.")
 
 # Testing a GET on /RBG/highestRankedPlayer
 print("   Testing '/RBG/highestRankedPlayer' path...")

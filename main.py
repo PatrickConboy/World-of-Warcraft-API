@@ -171,7 +171,7 @@ def battlegroup_list():
 # This route returns basic info on the 2v2 ladder
 @app.route('/2v2arena', methods = ['GET'])
 def info_for_2v2_ladder():
-   arenaInfo = db.getArenaStat("2v2 Info")
+   arenaInfo = db.getStat("2v2 Info")
    if arenaInfo == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -184,7 +184,7 @@ def info_for_2v2_ladder():
 # This route returns the name and rating of the highest ranked player in the 2v2 ladder
 @app.route('/2v2arena/highestRankedPlayer', methods = ['GET'])
 def highest_rank_2v2():
-   highestRank = db.getArenaStat("Top 2v2 Player")
+   highestRank = db.getStat("Top 2v2 Player")
    if highestRank == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -198,7 +198,7 @@ def highest_rank_2v2():
 # This route returns the total number of gladiators currently in the 2v2 ladder
 @app.route('/2v2arena/gladiatorTotal', methods = ['GET'])
 def number_of_2v2_gladiators():
-   gladiators = db.getArenaStat("Number of 2v2 Gladiators")
+   gladiators = db.getStat("Number of 2v2 Gladiators")
    if gladiators == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -211,7 +211,7 @@ def number_of_2v2_gladiators():
 # This route returns the top 5 servers with the most gladiators on them in the 2v2 ladder
 @app.route('/2v2arena/topServers', methods = ['GET'])
 def top_2v2_servers():
-   servers = db.getArenaStat("Top 2v2 Servers")
+   servers = db.getStat("Top 2v2 Servers")
    if servers == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -224,7 +224,7 @@ def top_2v2_servers():
 # This route returns basic info on the 3v3 ladder
 @app.route('/3v3arena', methods = ['GET'])
 def info_for_3v3_ladder():
-   arenaInfo = db.getArenaStat("3v3 Info")
+   arenaInfo = db.getStat("3v3 Info")
    if arenaInfo == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -237,7 +237,7 @@ def info_for_3v3_ladder():
 # This route returns the name and rating of the highest ranked player in the 3v3 ladder
 @app.route('/3v3arena/highestRankedPlayer', methods = ['GET'])
 def highest_rank_3v3():
-   highestRank = db.getArenaStat("Top 3v3 Player")
+   highestRank = db.getStat("Top 3v3 Player")
    if highestRank == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -251,7 +251,7 @@ def highest_rank_3v3():
 # This route returns the total number of gladiators currently in the 3v3 ladder
 @app.route('/3v3arena/gladiatorTotal', methods = ['GET'])
 def number_of_3v3_gladiators():
-   gladiators = db.getArenaStat("Number of 3v3 Gladiators")
+   gladiators = db.getStat("Number of 3v3 Gladiators")
    if gladiators == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -264,7 +264,7 @@ def number_of_3v3_gladiators():
 # This route returns the top 5 servers with the most gladiators on them in the 3v3 ladder
 @app.route('/3v3arena/topServers', methods = ['GET'])
 def top_3v3_servers():
-   servers = db.getArenaStat("Top 3v3 Servers")
+   servers = db.getStat("Top 3v3 Servers")
    if servers == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -274,23 +274,23 @@ def top_3v3_servers():
          }
    })
 
-# This route returns basic info on the rbg ladder
+# This route returns basic info on the RBG ladder
 @app.route('/RBG', methods = ['GET'])
-def info_for_rbg_ladder():
-   arenaInfo = db.getArenaStat("rbg Info")
-   if arenaInfo == None:
+def info_for_RBG_ladder():
+   RBGInfo = db.getStat("RBG Info")
+   if RBGInfo == None:
       abort(404, 'statistic not found')
    return make_json_response({
       "RBG":
          {
-            "info": arenaInfo.statistic
+            "info": RBGInfo.statistic
          }
    })
 
-# This route returns the name and rating of the highest ranked player in the rbg ladder
+# This route returns the name and rating of the highest ranked player in the RBG ladder
 @app.route('/RBG/highestRankedPlayer', methods = ['GET'])
-def highest_rank_rbg():
-   highestRank = db.getArenaStat("Top rbg Player")
+def highest_rank_RBG():
+   highestRank = db.getStat("Top RBG Player")
    if highestRank == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -301,10 +301,10 @@ def highest_rank_rbg():
          }
    })
 
-# This route returns the total number of gladiators currently in the rbg ladder
+# This route returns the total number of gladiators currently in the RBG ladder
 @app.route('/RBG/gladiatorTotal', methods = ['GET'])
-def number_of_rbg_gladiators():
-   gladiators = db.getArenaStat("Number of rbg Gladiators")
+def number_of_RBG_gladiators():
+   gladiators = db.getStat("Number of RBG Gladiators")
    if gladiators == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -314,10 +314,10 @@ def number_of_rbg_gladiators():
          }
    })
 
-# This route returns the top 5 servers with the most gladiators on them in the rbg ladder
+# This route returns the top 5 servers with the most gladiators on them in the RBG ladder
 @app.route('/RBG/topServers', methods = ['GET'])
-def top_rbg_servers():
-   servers = db.getArenaStat("Top rbg Servers")
+def top_RBG_servers():
+   servers = db.getStat("Top RBG Servers")
    if servers == None:
       abort(404, 'statistic not found')
    return make_json_response({
