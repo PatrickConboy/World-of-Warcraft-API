@@ -154,6 +154,11 @@ req_url = base_url + page
 response = oauth.get(req_url)
 results = json.loads(response.content.decode('utf-8'))
 
+# Adds a basic description of the 3v3 ladder
+db.addArenaStat("Info", 
+               "The /3v3arena endpoints in this API provide different statistics and information based on the top 5000 players in the WoW 3v3 ladder.",
+               None)
+
 # Adds highest ranked player to our database for arena stats
 db.addArenaStat("Top 3v3 Player", str(results['rows'][0]['rating']), results['rows'][0]['name'])
 db.commit()

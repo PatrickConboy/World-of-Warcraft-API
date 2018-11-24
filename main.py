@@ -132,6 +132,19 @@ def battlegroup_list():
       ]
    })
 
+# This route returns basic info on the 3v3 ladder
+@app.route('/3v3arena', methods = ['GET'])
+def info_for_3v3_ladder():
+   arenaInfo = db.getArenaStat("Info")
+   if arenaInfo == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "3v3arena": 
+         {
+            "info": arenaInfo.statistic
+         }
+   })
+
 # This route returns the name and rating of the highest ranked player in the 3v3 ladder
 @app.route('/3v3arena/highestRankedPlayer', methods = ['GET'])
 def highestRank3v3():
