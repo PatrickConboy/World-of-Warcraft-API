@@ -55,7 +55,7 @@ class ArenaStat(Base):
    __tablename__ = 'arena_stats'
 
    name        = Column(String(40), nullable = False, primary_key = True)
-   statistic   = Column(Float, nullable = False)
+   statistic   = Column(String(100), nullable = False)
    description = Column(String(50))
 
    def __repr__(self):

@@ -68,6 +68,8 @@ def race_description(raceName):
 @app.route('/class', methods = ['GET'])
 def class_list():
    classes = db.getClasses()
+   if classes == None:
+      abort(404, 'classes not found')
    return make_json_response({
       "classes": [
          {
@@ -93,6 +95,8 @@ def class_info(className):
 @app.route('/faction', methods = ['GET'])
 def faction_list():
    factions = db.getFactions()
+   if factions == None:
+      abort(404, 'factions not found')
    return make_json_response({
       "factions": [
          {
@@ -117,6 +121,8 @@ def faction_info(factionName):
 @app.route('/battlegroup', methods = ['GET'])
 def battlegroup_list():
    battlegroups = db.getBattlegroups()
+   if battlegroups == None:
+      abort(404, 'battlegroups not found not found')
    return make_json_response({
       "battlegroups": [
          {
@@ -130,18 +136,20 @@ def battlegroup_list():
 @app.route('/3v3arena/highestRankedPlayer', methods = ['GET'])
 def highestRank3v3():
    highestRank = db.getArenaStat("Top 3v3 Player")
+   if highestRank == None:
+      abort(404, 'statistic not found')
    return make_json_response({
       "player": 
          {
-            "player name": highestRank.description,
+            "name": highestRank.description,
             "rating": highestRank.statistic
          }
    })
 
 # This route returns the total number of gladiators currently in the 3v3 ladder
 @app.route('/3v3arena/gladiatorTotal', methods = ['GET'])
-def numberOfGladiators():
-   gladiators = db.getArenaStat("Number of Gladiators")
+def numberOf3v3Gladiators():
+   gladiators = db.getArenaStat("Number of 3v3 Gladiators")
    if gladiators == None:
       abort(404, 'statistic not found')
    return make_json_response({
@@ -151,6 +159,18 @@ def numberOfGladiators():
          }
    })
 
+# This route returns the top 5 servers with the most gladiators on them
+@app.route('/3v3arena/topServers', methods = ['GET'])
+def top3v3Servers():
+   servers = db.getArenaStat("Top 3v3 Servers")
+   if servers == None:
+      abort(404, 'statistic not found')
+   return make_json_response({
+      "servers": 
+         {
+            "name": servers.statistic
+         }
+   })
 
 ## HELPER METHODS
 
