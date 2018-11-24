@@ -148,4 +148,16 @@ contents = get_json(r)
 assert("battlegroups" in contents)
 assert(len(contents["battlegroups"]) == 9)
 
+# Testing a GET on /3v3arena/highestRank
+print("   Testing '/3v3arena/highestRank' path...")
+r = client.get('/3v3arena/highestRank' + 'hello')
+assert(r.status_code == 404)
+r = client.get('/3v3arena/highestRank')
+assert(r.status_code == 200)
+contents = get_json(r)
+assert("player" in contents)
+assert(len(contents) == 1)
+assert('player name' in contents['player'])
+assert('rating' in contents['player'])
+
 print("############### API TESTS DONE ##################")

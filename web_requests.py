@@ -151,17 +151,12 @@ req_url = base_url + page
 response = oauth.get(req_url)
 results = json.loads(response.content.decode('utf-8'))
 
-# Puts each battlegroup name from our query results into our database
-print(len(results['rows']))
-gladiators = [player['name'] for player in results['rows'] if player['tier'] == 'Gladiator']
+# Adds highest ranked player to our database for arena stats
+db.addArenaStat("Top 3v3 Player", results['rows'][0]['name'], results['rows'][0]['rating'])
+db.commit()
 
+# This code is wip
+gladiators  = [player['name'] for player in results['rows'] if player['tier'] == 'Gladiator']
 duelists    = [player['name'] for player in results['rows'] if player['tier'] == 'Duelist']
-
 rivals      = [player['name'] for player in results['rows'] if player['tier'] == 'Rival']
-
 challengers = [player['name'] for player in results['rows'] if player['tier'] == 'Challenger']
-
-print(len(gladiators))
-print(len(duelists))
-print(len(rivals))
-print(len(challengers))

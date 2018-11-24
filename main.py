@@ -126,6 +126,17 @@ def battlegroup_list():
       ]
    })
 
+@app.route('/3v3arena/highestRank', methods = ['GET'])
+def highestRank3v3():
+   highestRank = db.getArenaStat("Top 3v3 Player")
+   return make_json_response({
+      "player": 
+         {
+            "player name": highestRank.description,
+            "rating": highestRank.statistic
+         }
+   })
+
 
 ## HELPER METHODS
 
