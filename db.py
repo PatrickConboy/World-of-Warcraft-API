@@ -54,8 +54,9 @@ class Battlegroup(Base):
 class ArenaStat(Base):
    __tablename__ = 'arena_stats'
 
-   name      = Column(String(40), nullable = False, primary_key = True)
-   statistic = Column(Float, nullable = False)
+   name        = Column(String(40), nullable = False, primary_key = True)
+   description = Column(String(50))
+   statistic   = Column(Float, nullable = False)
 
    def __repr__(self):
       return "<Stat Name: {0} -- Stat: {1}>".format(self.name, self.statistic)
@@ -165,7 +166,7 @@ class Db:
                  .one_or_none()
 
    # This method adds a new arena stat to our database
-   def addArenaStat(self, name, stat):
-      newStat = ArenaStat(name=name, statistic=stat)
+   def addArenaStat(self, name, description, stat):
+      newStat = ArenaStat(name=name, description=description, statistic=stat)
       self.session.add(newStat)
       return newStat
