@@ -6,9 +6,7 @@
 # can use to access the World of Warcraft info stored in our database.
 
 
-                    API Paths
-
-/                             -- TODO: this path will return a list of possible API paths (low priority)
+                            API Paths
 
 /race                         -- this path returns the list of playable races
 /race/<raceName>              -- this path returns information on a specific race
@@ -39,8 +37,3 @@
 /RBG/highestRankedPlayer      -- returns the top player in the RBG ladder and their rating
 /RBG/gladiatorTotal           -- returns the total number of gladiators in the RBG ladder
 /RBG/topServers               -- returns the top five servers with most players in the top 5000 on the RBG ladder
-
-
-
-TODO: Refactor before finishing (high priority)
-
