@@ -162,6 +162,7 @@ class Db:
    def deleteFaction(self, faction):
       self.session.delete(faction)
 
+
    ########## METHODS FOR ROLE CLASS ###########
 
    # This method returns the list of roles in WoW
@@ -185,6 +186,7 @@ class Db:
    def deleteRole(self, role):
       self.session.delete(role)
 
+
    ########## METHODS FOR BATTLEGROUP CLASS ###########
 
    # This methods returns the list of battlegroups in WoW
@@ -196,6 +198,7 @@ class Db:
       newbg = Battlegroup(name=name)
       self.session.add(newbg)
       return newbg
+
 
    ########## METHODS FOR STAT CLASS ###########
 

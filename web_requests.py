@@ -37,6 +37,7 @@ base_url = 'https://us.api.blizzard.com/wow/'
 # Setup is done. Now we can access the specific parts of the Blizzard API we want.
 
 
+
 ############## Query for WoW API Races ################
 
 # Particular page requested. The specific query string will be
@@ -97,6 +98,8 @@ for race in results['races']:
       db.addRace(race['name'], race['id'], race['side'], "Hunter, Mage, Priest, Rogue, Warlock, Warrior, Monk", "Isolated behind a protective barrier for 10,000 years, the elves of Suramar grew increasingly dependent upon the arcane magic of the Nightwell. To protect this font of power, the leaders of the Nightborne struck a bargain with the Burning Legion that plunged their kingdom into civil war. After fighting for freedom from their demonic masters, the Nightborne seek allies in the Horde to help reclaim their place in the world.")
 db.commit()
 
+
+
 ############## Query for WoW API Classes ################
 
 # Explanation of what these individual lines are doing is the
@@ -118,6 +121,7 @@ for eachClass in results['classes']:
    elif className == 'Rogue' or className == 'Warlock' or className == 'Mage' or className == 'Hunter':
       db.addClass(eachClass['name'], eachClass['powerType'], "DPS")
 db.commit()
+
 
 
 ############## Adding Faction info into database ################
@@ -142,6 +146,8 @@ db.addRole("Healer", "Healers keep their allies alive by healing their wounds an
 # Add Damage Dealer info to database
 db.addRole("Damage Dealer (DPS)", "Damage dealers focus on the critical task of dealing damage to the party's foes.")
 db.commit()
+
+
 
 ############## Query for WoW API Battlegroups ################
 
@@ -200,6 +206,7 @@ for i in range(0,5):
 # Add our top 5 server list to the database
 db.addStat("Top 2v2 Servers", str(topFive), None)
 db.commit()
+
 
 
 ############## Query for WoW API 3v3 Arenas ################
