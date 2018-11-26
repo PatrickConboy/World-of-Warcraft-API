@@ -1,5 +1,6 @@
 from main import app, db
 import json
+from web_requests import getCharacter
 
 session = db.session
 

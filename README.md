@@ -37,3 +37,6 @@
 /RBG/highestRankedPlayer      -- returns the top player in the RBG ladder and their rating
 /RBG/gladiatorTotal           -- returns the total number of gladiators in the RBG ladder
 /RBG/topServers               -- returns the top five servers with most players in the top 5000 on the RBG ladder
+
+TODO: - pull info on individual characters so our user can make a request for their character or other characters
+      - need to adjust Class, Battlegroup, Faction, and Race so we can get their blizzard given Id

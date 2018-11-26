@@ -2,6 +2,7 @@
 
 from flask import Flask, request, make_response, json, url_for, abort
 import web_requests
+from web_requests import getCharacter
 from db import Db   # See db.py
 
 app = Flask(__name__)
@@ -290,6 +291,11 @@ def top_RBG_servers():
    return make_json_response({
       "servers": servers.statistic
    })
+
+@app.route('/character', methods = ['GET'])
+def character_info(characterName):
+   getCharacter()
+   return
 
 ## HELPER METHODS
 

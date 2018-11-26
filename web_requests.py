@@ -294,3 +294,15 @@ for i in range(0,5):
 # Add our top 5 server list to the database
 db.addStat("Top RBG Servers", str(topFive), None)
 db.commit()
+
+
+
+############## Query for WoW API Specific Characters ################
+
+def getCharacter(characterName, serverName):
+   page = 'character/{0}/{1}?locale=en_US&access_token=USyQ0Rt4htSVhUKNCf6O4lFGdM7Ir4KXoJ'.format(serverName, characterName)
+   req_url = base_url + page
+   response = oauth.get(req_url)
+   results = json.loads(response.content.decode('utf-8'))
+   print(results)
+   return results
