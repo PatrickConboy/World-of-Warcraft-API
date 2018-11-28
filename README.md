@@ -1,13 +1,20 @@
-# Project for CS328 - Data Management/Data Wrangling
-# Coded by: Od Ganzorig and Patrick Conboy
-# Date Created: 9/18/2018
-# Project Description: Our project pulls data from the Blizzard WoW API,
-# puts that data into our database, and then implements a basic web API that a user
-# can use to access the World of Warcraft info stored in our database.
+# World of Warcraft API
+This API serves as the final project for CS 328.
 
+# Game data
+The API is read-only and provides the user access to various bits of game information, highlighted below.
 
-                            API Paths
+# API Basic Info
+WoW API was developed and runs fine on Linux terminals. Has not been tested on a Windows terminal, but does run on Windows if using a Linux terminal such as Cmder.
 
+WoW API has a few requirements if you want to clone and use the code:
+- Python 3 or greater
+- Preferably a Linux-based terminal to run on
+- SQL Alchemy, Flask, requests_oauthlib, and oauthlib.oauth2 must all be installed
+
+**Note:** This API will be hosted online and use an online database at some point. (Not yet implemented)
+
+# API Documentation
 /race                         -- this path returns the list of playable races
 /race/<raceName>              -- this path returns information on a specific race
 /race/<raceName>/description  -- this path returns a description of the race
@@ -37,6 +44,3 @@
 /RBG/highestRankedPlayer      -- returns the top player in the RBG ladder and their rating
 /RBG/gladiatorTotal           -- returns the total number of gladiators in the RBG ladder
 /RBG/topServers               -- returns the top five servers with most players in the top 5000 on the RBG ladder
-
-TODO: - pull info on individual characters so our user can make a request for their character or other characters
-      - need to adjust Class, Battlegroup, Faction, and Race so we can get their blizzard given Id
