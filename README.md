@@ -18,9 +18,9 @@ WoW API has a few requirements if you want to clone and use the code:
 
 Base Url for API: https://worldofwarcraft-api.herokuapp.com/
 
-/race                         -- this path returns the list of playable races
-/race/<raceName>              -- this path returns information on a specific race
-/race/<raceName>/description  -- this path returns a description of the race
+- /race                         -- this path returns the list of playable races
+- /race/<raceName>              -- this path returns information on a specific race
+- /race/<raceName>/description  -- this path returns a description of the race
 
 /class                        -- this path returns a list of playable classes
 /class/<className>            -- this path returns information on a given class
