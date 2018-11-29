@@ -19,12 +19,14 @@ WoW API has a few requirements if you want to clone and use the code:
 Base Url for API: https://worldofwarcraft-api.herokuapp.com/
 
 /race                         -- this path returns the list of playable races
+```
     {'races': [
         {
             'link': '/race/Human', 
             'name': 'Human'
         }, ...
     ]} 
+```
 
 /race/"raceName"              -- this path returns information on a specific race
   
