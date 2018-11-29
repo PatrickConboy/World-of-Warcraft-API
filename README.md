@@ -1,5 +1,9 @@
 # World of Warcraft API
-This API serves as the final project for CS 328.
+This API is still in development, as of 11/29/2018.
+
+This API serves as the final project for CS 328. The API pulls information from the Blizzard API, organizes and stores that data in our database, and then provides endpoints for our user to access that data.
+
+The API is hosted on heroku.
 
 # Game data
 The API is read-only and provides the user access to various bits of game information, highlighted below.
@@ -12,7 +16,7 @@ WoW API has a few requirements if you want to clone and use the code:
 - Preferably a Linux-based terminal to run on
 - SQL Alchemy, Flask, requests_oauthlib, and oauthlib.oauth2 must all be installed
 
-**Note:** This API is hosted on heroku and requests can be made using the following base url: https://worldofwarcraft-api.herokuapp.com/
+**Note:** This API is hosted on heroku. Base url link is below in documentation.
 
 # API Documentation
 
