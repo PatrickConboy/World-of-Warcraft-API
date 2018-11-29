@@ -19,3 +19,13 @@ WoW API has a few requirements if you want to clone and use the code:
 Base Url for API: https://worldofwarcraft-api.herokuapp.com/
 
 For full API Documentation: [DOCUMENTATION.md](https://github.com/PatrickConboy/World-of-Warcraft-API/blob/master/DOCUMENTATION.md)
+
+# Contributors
+Main developers were Patrick Conboy and Od Ganzorig
+
+For full list of contributors see: [CONTRIBUTORS.txt](https://github.com/PatrickConboy/World-of-Warcraft-API/blob/master/CONTRIBUTORS.txt)
+
+# License
+This API uses the MIT license. 
+
+For more information see: [LICENSE.txt](https://github.com/PatrickConboy/World-of-Warcraft-API/blob/master/LICENSE.txt)
