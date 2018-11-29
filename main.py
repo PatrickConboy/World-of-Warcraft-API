@@ -54,7 +54,7 @@ def race_info(raceName):
    return make_json_response({
       "name": race.name,
       "faction": race.faction,
-      "playableClass": race.playableClasses,
+      "playableClasses": race.playableClasses,
       "link": url_for('race_info', raceName=race.name)
    })
 
