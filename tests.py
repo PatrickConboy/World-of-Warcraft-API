@@ -130,7 +130,7 @@ contents = get_json(r)
 assert(contents['name'] == 'Human')
 assert(contents['link'] == '/race/Human')
 assert(contents['faction'] == 'alliance')
-assert(contents['playableClass'] == 'Hunter, Mage, Paladin, Priest, Rogue, Warlock, Warrior, Death Knight, Monk')
+assert(contents['playableClasses'] == 'Hunter, Mage, Paladin, Priest, Rogue, Warlock, Warrior, Death Knight, Monk')
 
 # Testing a GET on /race/Troll
 r = client.get(base_url + '/race/Troll')
@@ -139,7 +139,7 @@ contents = get_json(r)
 assert(contents['name'] == 'Troll')
 assert(contents['link'] == '/race/Troll')
 assert(contents['faction'] == 'horde')
-assert(contents['playableClass'] == 'Druid, Hunter, Mage, Priest, Rogue, Shaman, Warlock, Warrior, Death Knight, Monk')
+assert(contents['playableClasses'] == 'Druid, Hunter, Mage, Priest, Rogue, Shaman, Warlock, Warrior, Death Knight, Monk')
 
 # Testing a GET on /race/Human/description
 print("   Testing '/race/<raceName>/description' path...")
