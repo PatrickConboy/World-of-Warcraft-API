@@ -8,9 +8,22 @@
     ]} 
 ```
 
-/race/"raceName"              -- this path returns information on a specific race
+/race/"raceName"              -- this path returns information on the given race
+```
+    {
+        'faction': 'alliance', 
+        'link': '/race/Human', 
+        'name': 'Human',
+        'playableClasses': 'Hunter, Mage, Paladin, Priest, Rogue, Warlock, Warrior, Death Knight, Monk'
+    }
+```
   
-/race/"raceName"/description  -- this path returns a description of the race
+/race/"raceName"/description  -- this path returns a description of the given race
+```
+    {
+        'description': 'Recent discoveries have shown that humans are descended from the barbaric vrykul, half-giant warriors who live in Northrend. Early humans were primarily a scattered and tribal people for several millennia, until the rising strength of the troll empire forced their strategic unification. Thus the nation of Arathor was formed, along with its capital, the city-state of Strom.'
+    }
+```
 
 /class                        -- this path returns a list of playable classes
 
