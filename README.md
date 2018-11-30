@@ -33,3 +33,5 @@ For full list of contributors see: [CONTRIBUTORS.txt](https://github.com/Patrick
 This API uses the MIT license. 
 
 For more information see: [LICENSE.txt](https://github.com/PatrickConboy/World-of-Warcraft-API/blob/master/LICENSE.txt)
+
+
