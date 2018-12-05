@@ -6,4 +6,4 @@ Od Ganzorig (odganzorig)
 Special contribution by our professor Haris Skiadas (skiadas) who provided base code and taught the class (CS 328)
 where we learned these topics.
 
-Another shout out to Slaton Blickman who provided support and ideas on implementation of the API.
+Another shout out to Slaton Blickman who provided a small amount of support and ideas on implementation of the API.
