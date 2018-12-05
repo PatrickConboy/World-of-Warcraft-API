@@ -16,12 +16,13 @@ WoW API has a few requirements if you want to clone and use the code:
 - Preferably a Linux-based terminal to run on
 - SQL Alchemy, Flask, requests_oauthlib, and oauthlib.oauth2 must all be installed
 
-**Note:** This API is hosted on heroku, but isn't working currently. Base url link is below in documentation.
+**Note:** This API is hosted on heroku, but isn't working currently. Base URL link is below in documentation.
 
 # API Documentation
 
 **Note:** This URL is currently returning a 503 for all requests and is not functioning properly.
-Base Url for API: https://worldofwarcraft-api.herokuapp.com/
+
+Base URL for API: https://worldofwarcraft-api.herokuapp.com/
 
 For full API Documentation: [DOCUMENTATION.md](https://github.com/PatrickConboy/World-of-Warcraft-API/blob/master/DOCUMENTATION.md)
 
