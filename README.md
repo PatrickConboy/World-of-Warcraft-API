@@ -1,42 +1,38 @@
-# Project for CS328 - Data Management/Data Wrangling
-# Coded by: Od Ganzorig and Patrick Conboy
-# Date Created: 9/18/2018
-# Project Description: Our project pulls data from the Blizzard WoW API,
-# puts that data into our database, and then implements a basic web API that a user
-# can use to access the World of Warcraft info stored in our database.
+# World of Warcraft API
+**This API is still in development.**
+
+This API serves as the final project for CS 328. The API pulls information from the Blizzard API, organizes and stores that data in our database, and then provides endpoints for our user to access that data.
+
+The API is hosted on heroku, but isn't working currently.
+
+# Game data
+The API is read-only and provides the user access to various bits of game information, highlighted below.
+
+# API Basic Info
+WoW API was developed and runs fine on Linux terminals. Has not been tested on a Windows terminal, but does run on Windows if using a Linux terminal such as Cmder.
+
+WoW API has a few requirements if you want to clone and use the code:
+- Python 3 or greater
+- Preferably a Linux-based terminal to run on
+- SQL Alchemy, Flask, requests_oauthlib, and oauthlib.oauth2 must all be installed
+
+**Note:** This API is hosted on heroku, but isn't working currently. Base url link is below in documentation.
+
+# API Documentation
+
+**Note:** This URL is currently returning a 503 for all requests and is not functioning properly.
+Base Url for API: https://worldofwarcraft-api.herokuapp.com/
+
+For full API Documentation: [DOCUMENTATION.md](https://github.com/PatrickConboy/World-of-Warcraft-API/blob/master/DOCUMENTATION.md)
+
+# Contributors
+Main developers were Patrick Conboy and Od Ganzorig
+
+For full list of contributors see: [CONTRIBUTORS.txt](https://github.com/PatrickConboy/World-of-Warcraft-API/blob/master/CONTRIBUTORS.txt)
+
+# License
+This API uses the MIT license. 
+
+For more information see: [LICENSE.txt](https://github.com/PatrickConboy/World-of-Warcraft-API/blob/master/LICENSE.txt)
 
 
-                            API Paths
-
-/race                         -- this path returns the list of playable races
-/race/<raceName>              -- this path returns information on a specific race
-/race/<raceName>/description  -- this path returns a description of the race
-
-/class                        -- this path returns a list of playable classes
-/class/<className>            -- this path returns information on a given class
-
-/faction                      -- this path returns both faction names
-/faction/<factionName>        -- this returns a brief summary on a specific faction
-
-/role                         -- this path returns list of playable roles in the game
-/role/<roleName>              -- this path returns info on a specific role
-
-/battlegroups                 -- returns list of all the battlegroups
-
-/2v2arena                     -- returns some info on the 2v2 pvp leaderboard
-/2v2arena/highestRankedPlayer -- returns the top player in the 2v2 ladder and their rating
-/2v2arena/gladiatorTotal      -- returns the total number of gladiators in the 2v2 ladder
-/2v2arena/topServers          -- returns the top five servers with most players in the top 5000 on the 2v2 ladder
-
-/3v3arena                     -- returns some info on the 3v3 pvp leaderboard
-/3v3arena/highestRankedPlayer -- returns the top player in the 3v3 ladder and their rating
-/3v3arena/gladiatorTotal      -- returns the total number of gladiators in the 3v3 ladder
-/3v3arena/topServers          -- returns the top five servers with most players in the top 5000 on the 3v3 ladder
-
-/RBG                          -- returns some info on the RBG pvp leaderboard
-/RBG/highestRankedPlayer      -- returns the top player in the RBG ladder and their rating
-/RBG/gladiatorTotal           -- returns the total number of gladiators in the RBG ladder
-/RBG/topServers               -- returns the top five servers with most players in the top 5000 on the RBG ladder
-
-TODO: - pull info on individual characters so our user can make a request for their character or other characters
-      - need to adjust Class, Battlegroup, Faction, and Race so we can get their blizzard given Id
