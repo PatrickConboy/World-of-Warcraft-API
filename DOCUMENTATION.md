@@ -94,29 +94,118 @@
 ```
 
 /role/"roleName"              -- this route returns info on a specific role
+```
+    {
+        'description': "Damage dealers focus on the critical task of dealing damage to the party's foes.", 
+        'link': '/role/Damage%20Dealer%20%28DPS%29',
+        'name': 'Damage Dealer (DPS)'
+    }
+```
 
 /battlegroups                 -- this route returns list of all the battlegroups
+```
+    {'battlegroups': [
+        {'battlegroup name': 'AU/NZ Battle Group'}, 
+        {'battlegroup name': 'Bloodlust'}, 
+        {'battlegroup name': 'Cyclone'}, 
+        {'battlegroup name': 'Rampage'}, 
+        {'battlegroup name': 'Reckoning'}, 
+        {'battlegroup name': 'Ruin'}, 
+        {'battlegroup name': 'Shadowburn'}, 
+        {'battlegroup name': 'Vengeance'}, 
+        {'battlegroup name': 'Vindication'}
+    ]}
+```
 
 /2v2arena                     -- this route returns some info on the 2v2 pvp leaderboard
+```
+    {
+        'info': 'The /2v2arena endpoints in this API provide different statistics and information based on the top 5000 players in the WoW 2v2 ladder.'
+    }
+```
 
 /2v2arena/highestRankedPlayer -- this route returns the top player in the 2v2 ladder and their rating
+```
+    {
+        'name': 'Floormat', 
+        'rating': '2932'
+    }
+```
 
 /2v2arena/gladiatorTotal      -- this route returns the total number of gladiators in the 2v2 ladder
+```
+    {'number': '1120'}
+```
 
 /2v2arena/topServers          -- this route returns the top five servers with most players in the top 5000 on the 2v2 ladder
+```
+    {
+        'servers': '[(\'Tichondrius\', 812), 
+                     (\'Illidan\', 341), 
+                     ("Kel\'Thuzad", 273), 
+                     (\'Sargeras\', 269),
+                     ("Mal\'Ganis", 224)]'
+    }
+```
 
 /3v3arena                     -- this route returns some info on the 3v3 pvp leaderboard
+```
+    {
+        'info': 'The /3v3arena endpoints in this API provide different statistics and information based on the top 5000 players in the WoW 3v3 ladder.'
+    }
+```
 
 /3v3arena/highestRankedPlayer -- this route returns the top player in the 3v3 ladder and their rating
+```
+    {
+        'name': 'Floormat', 
+        'rating': '2932'
+    }
+```
 
 /3v3arena/gladiatorTotal      -- this route returns the total number of gladiators in the 3v3 ladder
+```
+    {'number': '1120'}
+```
 
 /3v3arena/topServers          -- this route returns the top five servers with most players in the top 5000 on the 3v3 ladder
+```
+    {
+        'servers': '[(\'Tichondrius\', 812), 
+                     (\'Illidan\', 341), 
+                     ("Kel\'Thuzad", 273), 
+                     (\'Sargeras\', 269),
+                     ("Mal\'Ganis", 224)]'
+    }
+```
 
 /RBG                          -- this route returns some info on the RBG pvp leaderboard
+```
+    {
+        'info': 'The /RBG endpoints in this API provide different statistics and information based on the top 5000 players in the WoW RBG ladder.'
+    }
+```
 
 /RBG/highestRankedPlayer      -- this route returns the top player in the RBG ladder and their rating
+```
+    {
+        'name': 'Floormat', 
+        'rating': '2932'
+    }
+```
 
 /RBG/gladiatorTotal           -- this route returns the total number of gladiators in the RBG ladder
+```
+    {'number': '1120'}
+```
 
 /RBG/topServers               -- this route returns the top five servers with most players in the top 5000 on the RBG ladder
+```
+    {
+        'servers': '[(\'Tichondrius\', 812), 
+                     (\'Illidan\', 341), 
+                     ("Kel\'Thuzad", 273), 
+                     (\'Sargeras\', 269),
+                     ("Mal\'Ganis", 224)]'
+    }
+```
