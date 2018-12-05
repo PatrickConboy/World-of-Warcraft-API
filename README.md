@@ -1,5 +1,5 @@
 # World of Warcraft API
-This API is still in development, as of 11/29/2018.
+**This API is still in development.**
 
 This API serves as the final project for CS 328. The API pulls information from the Blizzard API, organizes and stores that data in our database, and then provides endpoints for our user to access that data.
 
